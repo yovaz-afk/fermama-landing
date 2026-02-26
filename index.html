@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ФерМама Digital — FoodTech-компания: предзаказы, P&L и аналитика для food-бизнеса</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0b0d12;
+      --bg-card: #13161f;
+      --bg-card2:#1a1e2a;
+      --border:  #222840;
+      --a1: #e8793a;
+      --a2: #c94040;
+      --a3: #f5a623;
+      --txt: #eef0f6;
+      --muted: #9aa3b8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content:'';
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      background:
+        radial-gradient(ellipse 65% 45% at 15%  8%,  rgba(232,121,58,.16) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 40% at 85% 90%,  rgba(201,64,64,.14)  0%, transparent 60%),
+        radial-gradient(ellipse 45% 35% at 65% 45%,  rgba(245,166,35,.07) 0%, transparent 55%);
+    }
+
+    .wrap { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 20px; }
+
+    /* ── HERO ── */
+    .hero { padding:88px 0 64px; text-align:center; }
+
+    .badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(232,121,58,.11); border:1px solid rgba(232,121,58,.28);
+      border-radius:40px; padding:7px 18px; font-size:13px; color:var(--a1);
+      margin-bottom:30px; letter-spacing:.3px; font-weight:600;
+    }
+
+    h1 {
+      font-size:clamp(2rem,5.8vw,3.6rem); font-weight:900;
+      line-height:1.12; letter-spacing:-.6px;
+      background:linear-gradient(120deg,#f5a623 0%,#e8793a 35%,#c94040 68%,#e8793a 100%);
+      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+      max-width:860px; margin:0 auto 24px;
+    }
+
+    .hero-sub {
+      font-size:clamp(1rem,2.3vw,1.22rem); color:var(--muted);
+      max-width:640px; margin:0 auto 18px; line-height:1.7;
+    }
+
+    .hero-note {
+      display:inline-block;
+      background:rgba(245,166,35,.08); border:1px solid rgba(245,166,35,.2);
+      border-radius:10px; padding:10px 20px; font-size:.9rem; color:var(--a3);
+      margin-bottom:44px; line-height:1.5;
+    }
+
+    /* ── CTA ── */
+    .cta-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; }
+
+    .cta-btn {
+      display:inline-flex; align-items:center; gap:10px;
+      background:linear-gradient(135deg,#e8793a 0%,#c94040 100%);
+      color:#fff; font-size:1.07rem; font-weight:700;
+      padding:18px 44px; border-radius:50px;
+      text-decoration:none; letter-spacing:.2px;
+      animation:pulse 2.5s ease-out infinite;
+      transition:transform .18s, box-shadow .18s;
+    }
+    .cta-btn:hover {
+      transform:translateY(-2px) scale(1.03);
+      box-shadow:0 18px 50px rgba(232,121,58,.45);
+      animation-play-state:paused;
+    }
+    @keyframes pulse {
+      0%  { box-shadow:0 0 0 0    rgba(232,121,58,.55); }
+      65% { box-shadow:0 0 0 18px rgba(232,121,58,0);   }
+      100%{ box-shadow:0 0 0 0    rgba(232,121,58,0);   }
+    }
+
+    .cta-hint { font-size:.87rem; color:var(--muted); }
+
+    /* ── SECTION ── */
+    .divider { height:1px; background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent); }
+    .sec { padding:72px 0; }
+    .sec-label { text-align:center; font-size:.75rem; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--a1); margin-bottom:10px; }
+    .sec-title { text-align:center; font-size:clamp(1.5rem,3.6vw,2.25rem); font-weight:800; margin-bottom:50px; }
+
+    /* ── FOR WHOM ── */
+    .who-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+    .who-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:16px; padding:22px 18px; text-align:center;
+      transition:border-color .2s, transform .2s;
+    }
+    .who-card:hover { border-color:rgba(232,121,58,.35); transform:translateY(-3px); }
+    .who-icon { font-size:2rem; margin-bottom:10px; }
+    .who-card h4 { font-size:.95rem; font-weight:700; margin-bottom:6px; }
+    .who-card p  { font-size:.83rem; color:var(--muted); line-height:1.55; }
+
+    /* ── FEATURES ── */
+    .feat-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:22px; }
+    .feat-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:20px; padding:32px 28px;
+      transition:transform .22s, border-color .22s, box-shadow .22s;
+    }
+    .feat-card:hover {
+      transform:translateY(-4px);
+      border-color:rgba(232,121,58,.38);
+      box-shadow:0 14px 44px rgba(0,0,0,.32);
+    }
+    .f-icon {
+      width:54px; height:54px; border-radius:15px;
+      display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+    }
+    .f-icon.o { background:rgba(232,121,58,.13); }
+    .f-icon.r { background:rgba(201,64,64,.13); }
+    .f-icon.g { background:rgba(245,166,35,.13); }
+    .f-icon.b { background:rgba(80,140,232,.13); }
+    .f-icon.p { background:rgba(160,80,232,.13); }
+    .f-icon.t { background:rgba(50,180,120,.13); }
+    .feat-card h3 { font-size:1.03rem; font-weight:700; margin-bottom:10px; line-height:1.35; }
+    .feat-card p  { font-size:.91rem; color:var(--muted); line-height:1.65; }
+
+    /* ── STEPS ── */
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); }
+    .step {
+      padding:36px 26px;
+      background:var(--bg-card); border:1px solid var(--border);
+    }
+    .step:first-child { border-radius:20px 0 0 20px; }
+    .step:last-child  { border-radius:0 20px 20px 0; }
+    .step + .step { border-left:none; }
+    .step-num {
+      width:38px; height:38px; border-radius:50%;
+      background:linear-gradient(135deg,#e8793a,#c94040);
+      color:#fff; font-weight:800; font-size:.95rem;
+      display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+    }
+    .step h4 { font-size:.97rem; font-weight:700; margin-bottom:8px; }
+    .step p  { font-size:.86rem; color:var(--muted); line-height:1.6; }
+
+    /* ── CASE ── */
+    .case-box {
+      background:var(--bg-card); border:1px solid rgba(232,121,58,.25);
+      border-radius:22px; padding:44px;
+      display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;
+    }
+    .case-lbl {
+      display:inline-block; background:rgba(232,121,58,.12); border:1px solid rgba(232,121,58,.25);
+      border-radius:30px; padding:4px 14px; font-size:.8rem; font-weight:700;
+      color:var(--a1); margin-bottom:14px;
+    }
+    .case-box h3 { font-size:1.3rem; font-weight:800; margin-bottom:12px; line-height:1.3; }
+    .case-box > div > p { font-size:.93rem; color:var(--muted); line-height:1.7; margin-bottom:22px; }
+    .stat-row { display:flex; gap:28px; flex-wrap:wrap; }
+    .stat-num { font-size:1.8rem; font-weight:900; background:linear-gradient(135deg,#f5a623,#e8793a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .stat-txt { font-size:.78rem; color:var(--muted); margin-top:2px; }
+
+    .case-visual { background:var(--bg-card2); border:1px solid var(--border); border-radius:16px; padding:26px 22px; }
+    .mock-hdr { display:flex; align-items:center; gap:10px; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+    .mock-av { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#e8793a,#c94040); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.85rem; color:#fff; flex-shrink:0; }
+    .mock-name { font-size:.9rem; font-weight:700; }
+    .mock-sub  { font-size:.75rem; color:var(--muted); }
+    .mock-msg  { background:rgba(232,121,58,.08); border:1px solid rgba(232,121,58,.15); border-radius:12px 12px 12px 4px; padding:12px 14px; font-size:.84rem; line-height:1.6; margin-bottom:12px; }
+    .mock-st { display:flex; gap:8px; flex-wrap:wrap; }
+    .st { border-radius:20px; padding:4px 12px; font-size:.75rem; font-weight:700; }
+    .st-new  { background:rgba(245,166,35,.15); color:#f5a623; border:1px solid rgba(245,166,35,.25); }
+    .st-ok   { background:rgba(50,180,120,.15); color:#32b478; border:1px solid rgba(50,180,120,.25); }
+    .st-done { background:rgba(80,140,232,.15); color:#508ce8; border:1px solid rgba(80,140,232,.25); }
+
+    /* ── BENEFITS ── */
+    .benefits { background:var(--bg-card); border:1px solid var(--border); border-radius:22px; padding:44px; }
+    .b-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .b-item { display:flex; gap:12px; align-items:flex-start; padding:16px; border-radius:12px; background:rgba(255,255,255,.02); }
+    .b-item svg { flex-shrink:0; margin-top:2px; }
+    .b-title { font-size:.93rem; font-weight:700; margin-bottom:4px; }
+    .b-desc  { font-size:.84rem; color:var(--muted); line-height:1.6; }
+
+    /* ── SCREENS SHOWCASE ── */
+    .phone-row { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; margin-top:10px; }
+    .phone-wrap { display:flex; flex-direction:column; align-items:center; gap:10px; }
+    .phone-frame {
+      width:200px; flex-shrink:0;
+      background:#1a1e2a; border:2px solid var(--border);
+      border-radius:28px; overflow:hidden;
+      box-shadow:0 24px 64px rgba(0,0,0,.55);
+      transition:transform .22s, box-shadow .22s;
+    }
+    .phone-frame:hover { transform:translateY(-6px); box-shadow:0 32px 72px rgba(0,0,0,.65); }
+    .phone-frame img { width:100%; display:block; }
+    .phone-caption { font-size:.78rem; color:var(--muted); text-align:center; }
+
+    /* ── FEAT SCREEN ── */
+    .feat-screen { margin-top:16px; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+    .feat-screen img { width:100%; display:block; }
+
+    /* ── CASE PHOTO ── */
+    .case-photo { border-radius:16px; overflow:hidden; border:1px solid var(--border); }
+    .case-photo img { width:100%; display:block; }
+
+    @media(max-width:640px){
+      .phone-frame { width:150px; }
+    }
+
+    /* ── FOOTER CTA ── */
+    .footer-cta { padding:64px 0 88px; text-align:center; }
+    .footer-cta h2 { font-size:clamp(1.6rem,4vw,2.5rem); font-weight:900; margin-bottom:14px; }
+    .footer-cta p  { color:var(--muted); font-size:1rem; max-width:520px; margin:0 auto 38px; line-height:1.6; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px){
+      .steps { grid-template-columns:1fr 1fr; }
+      .step:first-child  { border-radius:16px 0 0 0; }
+      .step:nth-child(2) { border-radius:0 16px 0 0; border-left:none; }
+      .step:nth-child(3) { border-radius:0 0 0 16px; border-top:none; border-left:1px solid var(--border); }
+      .step:last-child   { border-radius:0 0 16px 0; border-top:none; }
+    }
+    @media(max-width:640px){
+      .hero { padding:56px 0 44px; }
+      .case-box { grid-template-columns:1fr; padding:24px 18px; gap:22px; }
+      .b-grid { grid-template-columns:1fr; }
+      .steps { grid-template-columns:1fr; }
+      .step:first-child  { border-radius:16px 16px 0 0; }
+      .step:nth-child(2) { border-radius:0; border-top:none; border-left:1px solid var(--border); }
+      .step:nth-child(3) { border-radius:0; border-top:none; border-left:1px solid var(--border); }
+      .step:last-child   { border-radius:0 0 16px 16px; border-top:none; border-left:1px solid var(--border); }
+      .benefits { padding:24px 18px; }
+      .sec { padding:52px 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="badge">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" fill="#e8793a" opacity=".25"/>
+        <path d="M17.76 8.04L15.6 17.67c-.16.7-.58.87-1.17.54l-3.23-2.38-1.56 1.5c-.17.17-.32.32-.66.32l.24-3.33 6.1-5.51c.27-.24-.06-.37-.41-.14l-7.53 4.74-3.24-1.01c-.7-.22-.72-.7.15-1.03L16.8 7.01c.59-.21 1.1.14.96 1.03z" fill="#e8793a"/>
+      </svg>
+      FoodTech-компания · Йошкар-Ола
+    </div>
+
+    <h1>Цифровые инструменты для food-бизнеса — от команды, которая сама в нём работает</h1>
+
+    <p class="hero-sub">
+      Мы — мясное производство и розница&nbsp;ФерМама. Построили Telegram&nbsp;Mini&nbsp;App для предзаказов и автоматизировали P&amp;L и аналитику для себя.
+      Теперь предлагаем эти инструменты другим food-бизнесам&nbsp;— под ключ.
+    </p>
+
+    <div class="hero-note">
+      ✓&nbsp; Пользуемся сами: предзаказы через Mini&nbsp;App, P&amp;L собирается автоматически каждый месяц
+    </div>
+
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://t.me/FerMama" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Обсудить проект
+      </a>
+      <span class="cta-hint">Отвечаем в течение дня, расскажем детали</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ TWO DIRECTIONS ═══ -->
+  <section class="sec">
+    <p class="sec-label">Что мы делаем</p>
+    <h2 class="sec-title">Два продукта — одна экспертиза</h2>
+    <p style="text-align:center;color:var(--muted);font-size:.97rem;max-width:600px;margin:0 auto 44px;line-height:1.7;">
+      Мы понимаем боль food-бизнеса изнутри: хаос в заказах, ручная отчётность, решения «вслепую». Оба инструмента мы сначала обкатали на себе.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;">
+
+      <div style="background:var(--bg-card);border:1px solid rgba(232,121,58,.3);border-radius:22px;padding:36px 30px;">
+        <div style="width:54px;height:54px;border-radius:15px;background:rgba(232,121,58,.13);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#e8793a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div style="font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a1);margin-bottom:10px;">Продукт 1</div>
+        <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:12px;line-height:1.35;">Telegram Mini App для предзаказов и акций</h3>
+        <p style="font-size:.91rem;color:var(--muted);line-height:1.65;margin-bottom:20px;">Клиенты оформляют заказы прямо в Telegram — без звонков и Excel. Предзаказы, акции, база клиентов, аналитика трафика — всё внутри бота.</p>
+        <div style="font-size:.83rem;color:var(--a3);font-weight:600;">→ Подходит: мясные магазины, пекарни, кулинарии, рестораны</div>
+      </div>
+
+      <div style="background:var(--bg-card);border:1px solid rgba(80,140,232,.3);border-radius:22px;padding:36px 30px;">
+        <div style="width:54px;height:54px;border-radius:15px;background:rgba(80,140,232,.13);display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#508ce8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div style="font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#508ce8;margin-bottom:10px;">Продукт 2</div>
+        <h3 style="font-size:1.15rem;font-weight:800;margin-bottom:12px;line-height:1.35;">Автоматизация P&amp;L, аналитики и отчётности</h3>
+        <p style="font-size:.91rem;color:var(--muted);line-height:1.65;margin-bottom:20px;">P&amp;L собирается сам из ваших данных. Аналитика продаж, ABC/XYZ-анализ, ИИ-рекомендации по улучшению показателей — без ручного Excel раз в месяц.</p>
+        <div style="font-size:.83rem;color:#508ce8;font-weight:600;">→ Подходит: производства и розница с 1С, МойСклад или Google Sheets</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FOR WHOM ═══ -->
+  <section class="sec">
+    <p class="sec-label">Для кого</p>
+    <h2 class="sec-title">Подойдёт любому бизнесу с предзаказами или акциями</h2>
+    <p style="text-align:center;color:var(--muted);font-size:.97rem;max-width:620px;margin:0 auto 36px;line-height:1.7;">Особенно актуально для тех, кто устал закупать «на глаз» и терять выручку в праздники — предзаказы дают точный спрос заранее.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🥩</div>
+        <h4>Мясные магазины</h4>
+        <p>«Мясные дни», спецпредложения, предзаказ на праздники</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🌾</div>
+        <h4>Фермерские хозяйства</h4>
+        <p>Сезонные продукты, ящики с овощами, молочка по подписке</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🍽️</div>
+        <h4>Кафе и рестораны</h4>
+        <p>Предзаказ блюд, сеты на вынос, акционные меню</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🧁</div>
+        <h4>Кулинарии и пекарни</h4>
+        <p>Торты на заказ, выпечка партиями, праздничные наборы</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏪</div>
+        <h4>Локальные производители</h4>
+        <p>Оптовые заявки, акции для постоянных клиентов</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="sec">
+    <p class="sec-label">Что получает ваш бизнес</p>
+    <h2 class="sec-title">Всё необходимое — уже в приложении</h2>
+    <div class="feat-grid">
+
+      <div class="feat-card">
+        <div class="f-icon o">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="#e8793a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0" stroke="#e8793a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Заказы сразу в Telegram-чате</h3>
+        <p>Каждый новый заказ мгновенно прилетает в чат вашей команды и тут же отправляется автосообщение клиенту в бот, что его заказ принят.</p>
+        <div class="feat-screen"><img src="screen-order.jpg" alt="Заказ в Telegram-чате команды" /></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon r">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#c94040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Аналитика по клиентам и трафику</h3>
+        <p>Видно, кто и откуда пришёл: по какой реферальной ссылке, из какого канала. Статистика в реальном времени — без сторонних сервисов.</p>
+        <div class="feat-screen"><img src="screen-analytics.jpg" alt="Экран аналитики" /></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon g">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="17 8 12 3 7 8" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="12" y1="3" x2="12" y2="15" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Импорт товаров из Excel</h3>
+        <p>Загружайте ассортимент списком, фото пачкой. Новая акция запускается за минуты — не нужно вносить каждый товар вручную.</p>
+        <div class="feat-screen"><img src="screen-import.jpg" alt="Импорт товаров из Excel" /></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon b">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#508ce8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Акции и спецпредложения</h3>
+        <p>Создавайте акции с ограниченным сроком, задавайте условия, показывайте клиентам только актуальное. Предзаказ — в 1 клик.</p>
+        <div class="feat-screen"><img src="screen-promotions.jpg" alt="Управление акциями" /></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon p">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="#a050e8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="7" r="4" stroke="#a050e8" stroke-width="2"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="#a050e8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>База клиентов внутри бота</h3>
+        <p>Все клиенты сохраняются автоматически. История заказов, контакты — доступны команде без лишних таблиц и CRM.</p>
+        <div class="feat-screen"><img src="screen-clients.jpg" alt="База клиентов" /></div>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon t">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" stroke="#32b478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" stroke="#32b478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Реферальные ссылки</h3>
+        <p>Генерируйте уникальные ссылки для блогеров и партнёров. Отслеживайте, сколько клиентов пришло по каждой — считайте ROI без догадок.</p>
+        <div class="feat-screen"><img src="screen-referrals.jpg" alt="Экран реферальных ссылок" /></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ AUTOMATION ═══ -->
+  <section class="sec">
+    <p class="sec-label">Автоматизация</p>
+    <h2 class="sec-title">P&amp;L, аналитика и ИИ-рекомендации — без ручного труда</h2>
+    <p style="text-align:center;color:var(--muted);font-size:.97rem;max-width:620px;margin:0 auto 44px;line-height:1.7;">
+      Данные из вашей учётки → автоматический P&amp;L каждый месяц → аналитика с выводами → конкретные рекомендации по показателям. Никаких Excel-таблиц вручную.
+    </p>
+    <div class="feat-grid" style="grid-template-columns:repeat(2,1fr)">
+
+      <div class="feat-card">
+        <div class="f-icon b">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="3" width="20" height="18" rx="3" stroke="#508ce8" stroke-width="2"/>
+            <path d="M7 8h10M7 12h6M7 16h8" stroke="#508ce8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>P&amp;L автоматически</h3>
+        <p>Отчёт о прибылях и убытках собирается сам — из выгрузок 1С, МойСклад или Google Sheets. Выручка, себестоимость, зарплаты, расходы — всё по направлениям и итогом. Раз настроили — каждый месяц готово без вашего участия.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon r">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="#c94040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Аналитика продаж и ABC/XYZ</h3>
+        <p>Видно, какие товары зарабатывают, какие тянут вниз. ABC/XYZ-анализ по категориям и SKU — понимаете, что закупать больше, от чего отказаться. Динамика по неделям и месяцам в понятном дашборде.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon g">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#f5a623" stroke-width="2"/>
+            <path d="M12 8v4l3 3" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>ИИ-рекомендации по показателям</h3>
+        <p>ИИ анализирует ваши данные и даёт конкретные советы: где растут расходы, какие акции не окупаются, как скорректировать закупки. Не абстрактные советы, а выводы из ваших цифр.</p>
+      </div>
+
+      <div class="feat-card">
+        <div class="f-icon p">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <circle cx="9" cy="5" r="3" stroke="#a050e8" stroke-width="2"/>
+            <circle cx="19" cy="5" r="3" stroke="#a050e8" stroke-width="2"/>
+            <circle cx="14" cy="19" r="3" stroke="#a050e8" stroke-width="2"/>
+            <path d="M9 8v3m10-3v3M9 14l5 2m5-2l-5 2" stroke="#a050e8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Интеграции: 1С, CRM, n8n</h3>
+        <p>Подключаем вашу учётную систему, CRM и мессенджеры через n8n — данные текут автоматически, отчёты приходят в Telegram или на почту. Никакого ручного переноса цифр.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="sec">
+    <p class="sec-label">Как это работает</p>
+    <h2 class="sec-title">Просто для клиента, удобно для команды</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Клиент открывает Mini App</h4>
+        <p>Прямо в Telegram — через ссылку, кнопку в боте или пост в канале. Ничего устанавливать не нужно.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Выбирает акцию и оформляет заказ</h4>
+        <p>Видит актуальные предложения, выбирает товары, указывает данные. Меньше минуты.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Заказ прилетает в бот команды</h4>
+        <p>Сотрудник видит заказ мгновенно, подтверждает и ведёт по статусам до выдачи.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Аналитика и повторные продажи</h4>
+        <p>Клиент сохранён в базе. Следующую акцию он увидит в боте — и вернётся снова.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ SCREENS SHOWCASE ═══ -->
+  <section class="sec">
+    <p class="sec-label">Так выглядит приложение</p>
+    <h2 class="sec-title">Интерфейс — чистый и понятный для клиента</h2>
+    <div class="phone-row">
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <img src="screen-promo.jpg" alt="Экран акции — Мясной день" />
+        </div>
+        <span class="phone-caption">Экран акции с предзаказом</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <img src="screen-catalog.jpg" alt="Каталог товаров" />
+        </div>
+        <span class="phone-caption">Каталог категорий</span>
+      </div>
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <img src="screen-products.jpg" alt="Список товаров с ценами" />
+        </div>
+        <span class="phone-caption">Товары с ценами и акциями</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ CASE ═══ -->
+  <section class="sec">
+    <p class="sec-label">Живой пример</p>
+    <h2 class="sec-title">Уже работает в реальном бизнесе</h2>
+    <div class="case-box">
+      <div>
+        <span class="case-lbl">Собственный кейс · ФерМама · г. Йошкар-Ола</span>
+        <h3>Запустили предзаказы через Telegram и автоматизировали P&amp;L — на своём бизнесе</h3>
+        <p>
+          Раньше в праздники закупали мясо «на глаз»: то излишки, то не хватает. После запуска Mini&nbsp;App клиенты делают предзаказ заранее — мы точно знаем спрос и закупаем без потерь. Параллельно настроили автосборку P&amp;L: отчёт по выручке, себестоимости и расходам готов каждый месяц без ручного труда.
+        </p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">53 564 ₽</div>
+            <div class="stat-txt">предзаказов за 2 дня акции</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">P&amp;L авто</div>
+            <div class="stat-txt">собирается без участия команды</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">0</div>
+            <div class="stat-txt">потерянных заказов</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;">
+        <div style="width:200px;background:#1a1e2a;border:2px solid var(--border);border-radius:28px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.55);">
+          <img src="screen-analytics.jpg" alt="Аналитика ФерМама — 53 564 ₽ за 2 дня" style="width:100%;display:block;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ WHY ORDER ═══ -->
+  <section class="sec">
+    <p class="sec-label">Почему мы</p>
+    <h2 class="sec-title">Что отличает нас от обычного IT-подрядчика</h2>
+    <div class="benefits">
+      <div class="b-grid">
+
+        <div class="b-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(232,121,58,.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#e8793a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="b-title">Работает на нашем собственном бизнесе</div>
+            <div class="b-desc">Не прототипы — продукты, которыми мы сами пользуемся каждый день. Предзаказы, P&amp;L, аналитика — всё обкатано на реальных данных ФерМама.</div>
+          </div>
+        </div>
+
+        <div class="b-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(232,121,58,.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#e8793a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="b-title">Настройка под ваш бренд и ассортимент</div>
+            <div class="b-desc">Ваши цвета, название, товары, акции. Не шаблон — продукт с вашим лицом.</div>
+          </div>
+        </div>
+
+        <div class="b-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(232,121,58,.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#e8793a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="b-title">Быстрый запуск</div>
+            <div class="b-desc">Адаптация и запуск занимают дни, не месяцы. Вы уже можете принимать первые заказы.</div>
+          </div>
+        </div>
+
+        <div class="b-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(232,121,58,.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#e8793a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="b-title">Поддержка и доработки</div>
+            <div class="b-desc">После запуска мы помогаем с вопросами, правками и новыми функциями под ваши задачи.</div>
+          </div>
+        </div>
+
+        <div class="b-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(232,121,58,.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#e8793a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="b-title">Всё в одном — без лишних подписок</div>
+            <div class="b-desc">Заказы, клиенты, аналитика, рефералы — внутри Telegram. Никаких платных сторонних сервисов.</div>
+          </div>
+        </div>
+
+        <div class="b-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="rgba(232,121,58,.15)"/>
+            <path d="M8 12l3 3 5-5" stroke="#e8793a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="b-title">Ваши клиенты уже в Telegram</div>
+            <div class="b-desc">Не нужно переучивать аудиторию. Mini App открывается там, где люди и так проводят время каждый день.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta">
+    <h2>Хотите автоматизировать свой food-бизнес?</h2>
+    <p>Напишите — расскажем, что подойдёт именно вам: Mini App, автоматизация P&amp;L или оба направления сразу.</p>
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://t.me/FerMama" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Обсудить проект
+      </a>
+      <span class="cta-hint">Отвечаем быстро, без лишних формальностей</span>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
