@@ -40,8 +40,22 @@
 
     .wrap { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 20px; }
 
+    /* ── TOPBAR ── */
+    .topbar {
+      display:flex; align-items:center; gap:12px;
+      padding:24px 0 0;
+    }
+    .topbar img {
+      width:44px; height:44px; border-radius:50%;
+      object-fit:cover; flex-shrink:0;
+    }
+    .topbar-name {
+      font-size:.97rem; font-weight:700; color:var(--txt); letter-spacing:-.1px;
+    }
+    .topbar-name span { color:var(--a1); }
+
     /* ── HERO ── */
-    .hero { padding:88px 0 64px; text-align:center; }
+    .hero { padding:56px 0 64px; text-align:center; }
 
     .badge {
       display:inline-flex; align-items:center; gap:8px;
@@ -248,6 +262,12 @@
 </head>
 <body>
 <div class="wrap">
+
+  <!-- ═══ TOPBAR ═══ -->
+  <div class="topbar">
+    <img src="fermama-logo.png" alt="ФерМама логотип" />
+    <span class="topbar-name">ФерМама <span>Digital</span></span>
+  </div>
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
@@ -674,6 +694,7 @@
 
   <!-- ═══ FOOTER CTA ═══ -->
   <section class="footer-cta">
+    <img src="fermama-logo.png" alt="ФерМама" style="width:56px;height:56px;border-radius:50%;object-fit:cover;margin-bottom:20px;opacity:.9;" />
     <h2>Хотите автоматизировать свой food-бизнес?</h2>
     <p>Напишите — расскажем, что подойдёт именно вам: Mini App, автоматизация P&amp;L или оба направления сразу.</p>
     <div class="cta-wrap">
