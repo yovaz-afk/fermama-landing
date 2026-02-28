@@ -92,7 +92,16 @@
   .phone-frame.active { display: block; }
   .phone-frame img { width: 100%; display: block; }
   .phone-frame--md { width: 195px; }
-  .phone-frame--sm { width: 130px; border-radius: 26px; box-shadow: 0 16px 40px rgba(0,0,0,.6); }
+  .phone-frame--sm { width: 168px; border-radius: 30px; box-shadow: 0 16px 40px rgba(0,0,0,.6); }
+
+  /* ── QR CODE ── */
+  .qr-section { text-align: center; padding: 40px 24px 48px; max-width: 600px; margin: 0 auto; }
+  .qr-hint { font-family: 'Geologica', sans-serif; font-weight: 900; font-size: clamp(1.4rem, 5vw, 1.9rem); margin-bottom: 8px; }
+  .qr-sub { font-size: .92rem; color: var(--muted); margin-bottom: 28px; line-height: 1.5; }
+  .qr-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: 14px; }
+  .qr-frame { background: #fff; border-radius: 22px; padding: 18px; box-shadow: 0 0 0 3px rgba(245,166,35,.45), 0 28px 72px rgba(0,0,0,.55); }
+  .qr-frame img { display: block; border-radius: 6px; }
+  .qr-url { font-size: .78rem; color: var(--dim); font-family: monospace; letter-spacing: .4px; }
   .screens-section { margin-top: 36px; text-align: center; }
   .screens-section + .screens-section { border-top: 1px solid var(--bdr); padding-top: 36px; }
   .screens-title {
@@ -301,6 +310,20 @@
 
 <hr class="div">
 
+<!-- QR CODE -->
+<div class="qr-section reveal">
+  <p class="qr-hint">Хотите протестировать?</p>
+  <p class="qr-sub">Наведите камеру телефона на QR-код — и вы сразу в приложении</p>
+  <div class="qr-wrap">
+    <div class="qr-frame">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https%3A%2F%2Ft.me%2Ffermama_shop_bot%3Fstart%3Dref6&margin=2" alt="QR-код приложения ФерМама" width="200" height="200">
+    </div>
+    <p class="qr-url">t.me/fermama_shop_bot</p>
+  </div>
+</div>
+
+<hr class="div">
+
 <!-- SCREENSHOTS -->
 <div class="phone-showcase">
   <p class="sec-label" style="text-align:center;margin-top:32px;">Как это выглядит</p>
@@ -325,10 +348,6 @@
       <div class="phones-col">
         <div class="phone-frame active phone-frame--md"><img src="img/screen-cart.jpg" alt="Корзина"></div>
         <span class="phone-label">Корзина</span>
-      </div>
-      <div class="phones-col">
-        <div class="phone-frame active phone-frame--md"><img src="img/screen-delivery.jpg" alt="Доставка"></div>
-        <span class="phone-label">Доставка</span>
       </div>
     </div>
   </div>
@@ -632,7 +651,7 @@
 <!-- ЦЕНА -->
 <section style="max-width:900px;">
   <p class="sec-label reveal">Стоимость</p>
-  <h2 class="reveal">Прозрачные тарифы — без сюрпризов</h2>
+  <h2 class="reveal">Прозрачные тарифы</h2>
   <p class="lead reveal">Разовая настройка + ежемесячная подписка. Первая акция — бесплатно, чтобы убедиться что работает.</p>
   <div class="pricing-grid">
 
