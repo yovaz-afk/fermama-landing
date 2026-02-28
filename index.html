@@ -844,6 +844,67 @@
       text-decoration: none; border-radius: 40px; white-space: nowrap;
     }
 
+    /* ─── QUIZ ─── */
+    .quiz-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.78); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 16px;
+    }
+    .quiz-overlay.open { display: flex; }
+    .quiz-modal {
+      background: #161310; border: 1px solid rgba(245,166,35,.22);
+      border-radius: 24px; padding: 36px 32px 32px;
+      width: 100%; max-width: 460px; position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,.7);
+      animation: qIn .28s ease;
+    }
+    @keyframes qIn { from { opacity:0; transform: translateY(18px) scale(.97); } to { opacity:1; transform: none; } }
+    .quiz-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; color: var(--muted);
+      font-size: 1.2rem; cursor: pointer; padding: 4px 8px;
+      line-height: 1;
+    }
+    .quiz-close:hover { color: var(--txt); }
+    .quiz-prog-wrap { margin-bottom: 24px; }
+    .quiz-prog-label { font-size: .72rem; color: var(--muted); margin-bottom: 6px; }
+    .quiz-prog-track { height: 3px; background: rgba(255,255,255,.08); border-radius: 4px; }
+    .quiz-prog-fill  { height: 3px; background: linear-gradient(90deg,#f5a623,#e8793a); border-radius: 4px; transition: width .35s ease; }
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+    .quiz-q { font-family: 'Geologica', sans-serif; font-size: 1.18rem; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
+    .quiz-opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .quiz-opts-col  { display: flex; flex-direction: column; gap: 10px; }
+    .quiz-opts-row  { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+    .quiz-opt {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px; padding: 13px 10px; cursor: pointer; color: var(--txt);
+      font-size: .88rem; font-family: 'Inter', sans-serif; text-align: center;
+      transition: border-color .18s, background .18s, transform .15s;
+      line-height: 1.3;
+    }
+    .quiz-opt:hover  { border-color: rgba(245,166,35,.4); background: rgba(245,166,35,.07); }
+    .quiz-opt.picked { border-color: var(--a1); background: rgba(245,166,35,.13); color: var(--a1); }
+    .quiz-opts-row .quiz-opt { padding: 12px 6px; }
+    .quiz-input {
+      width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px; padding: 14px 16px; color: var(--txt); font-size: .95rem;
+      font-family: 'Inter', sans-serif; outline: none; box-sizing: border-box; margin-bottom: 16px;
+    }
+    .quiz-input:focus { border-color: var(--a1); }
+    .quiz-input::placeholder { color: var(--muted); }
+    .quiz-submit {
+      width: 100%; padding: 16px; border: none; border-radius: 40px; cursor: pointer;
+      background: linear-gradient(135deg,#f5a623,#e8793a); color: #0d0b0a;
+      font-weight: 800; font-size: 1rem; font-family: 'Geologica', sans-serif;
+      transition: opacity .2s, transform .15s;
+    }
+    .quiz-submit:hover { opacity: .9; transform: translateY(-1px); }
+    @media (max-width: 500px) {
+      .quiz-modal { padding: 28px 18px 24px; }
+      .quiz-opts-row { grid-template-columns: repeat(2,1fr); }
+    }
+
     /* ─── UTIL ─── */
     .text-grad {
       background: linear-gradient(135deg, #f5a623, #e8793a);
@@ -863,7 +924,7 @@
       <a href="#pricing">Тарифы</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a href="https://t.me/FerMama?start=landing" target="_blank" rel="noopener" class="nav__cta">Запустить бесплатно</a>
+    <a href="#" class="nav__cta quiz-trigger">Запустить бесплатно</a>
   </div>
 </nav>
 
@@ -895,7 +956,7 @@
         </div>
 
         <div class="cta-group">
-          <a href="https://t.me/FerMama?start=landing" target="_blank" rel="noopener" class="btn-primary" id="heroCta">
+          <a href="#" class="btn-primary quiz-trigger" id="heroCta">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#0d0b0a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -993,7 +1054,7 @@
       </div>
     </div>
     <div style="text-align:center;margin-top:36px;" class="reveal">
-      <a href="https://t.me/FerMama?start=landing" target="_blank" rel="noopener"
+      <a href="#" class="quiz-trigger"
         style="display:inline-flex;align-items:center;gap:8px;padding:13px 28px;
         background:transparent;border:1px solid rgba(245,166,35,.35);color:var(--a1);
         font-weight:700;font-size:.9rem;text-decoration:none;border-radius:40px;
@@ -1133,7 +1194,7 @@
             <div class="stat__lbl">среднее время оформления</div>
           </div>
         </div>
-        <a href="https://t.me/FerMama?start=landing" target="_blank" rel="noopener" class="case-cta">
+        <a href="#" class="case-cta quiz-trigger">
           Хочу так же для своего бизнеса →
         </a>
       </div>
@@ -1322,7 +1383,7 @@
           <li><span class="ck">✓</span> База клиентов</li>
           <li><span class="xx">—</span> Реферальные ссылки</li>
         </ul>
-        <a href="https://t.me/FerMama?start=start" target="_blank" rel="noopener" class="pc__cta">Подключить</a>
+        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
       </div>
 
       <!-- Бизнес — Featured -->
@@ -1342,7 +1403,7 @@
           <li><span class="ck">✓</span> База клиентов</li>
           <li><span class="ck">✓</span> Приоритетная поддержка</li>
         </ul>
-        <a href="https://t.me/FerMama?start=business" target="_blank" rel="noopener" class="pc__cta">Подключить</a>
+        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
       </div>
 
       <!-- Про -->
@@ -1361,7 +1422,7 @@
           <li><span class="ck">✓</span> Несколько точек</li>
           <li><span class="ck">✓</span> Персональная поддержка</li>
         </ul>
-        <a href="https://t.me/FerMama?start=pro" target="_blank" rel="noopener" class="pc__cta">Подключить</a>
+        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
       </div>
 
     </div>
@@ -1500,7 +1561,7 @@
       убедитесь что работает, потом решите.
     </p>
     <div class="cta-center reveal">
-      <a href="https://t.me/FerMama?start=landing" target="_blank" rel="noopener" class="btn-primary" id="footerCta">
+      <a href="#" class="btn-primary quiz-trigger" id="footerCta">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#0d0b0a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -1548,18 +1609,170 @@
   </div>
 </footer>
 
+<!-- ═══ QUIZ MODAL ═══ -->
+<div class="quiz-overlay" id="quizOverlay">
+  <div class="quiz-modal">
+    <button class="quiz-close" id="quizClose">✕</button>
+    <div class="quiz-prog-wrap">
+      <div class="quiz-prog-label" id="quizLabel">Шаг 1 из 4</div>
+      <div class="quiz-prog-track"><div class="quiz-prog-fill" id="quizFill" style="width:25%"></div></div>
+    </div>
+    <!-- Step 1 -->
+    <div class="quiz-step active" id="qs1">
+      <div class="quiz-q">Какой у вас бизнес?</div>
+      <div class="quiz-opts-grid">
+        <button class="quiz-opt" data-q="1" data-val="Мясной магазин">🥩 Мясной магазин</button>
+        <button class="quiz-opt" data-q="1" data-val="Пекарня">🥐 Пекарня</button>
+        <button class="quiz-opt" data-q="1" data-val="Кафе / ресторан">☕ Кафе / ресторан</button>
+        <button class="quiz-opt" data-q="1" data-val="Доставка еды">🚚 Доставка еды</button>
+        <button class="quiz-opt" data-q="1" data-val="Фермерское хозяйство">🌾 Фермерское хоз-во</button>
+        <button class="quiz-opt" data-q="1" data-val="Другой бизнес" id="optOther">🏪 Другое</button>
+      </div>
+      <div id="otherBizWrap" style="display:none;margin-top:14px;">
+        <input class="quiz-input" id="otherBizInput" type="text" placeholder="Опишите ваш бизнес...">
+        <button class="quiz-submit" id="otherBizNext">Далее →</button>
+      </div>
+    </div>
+    <!-- Step 2 -->
+    <div class="quiz-step" id="qs2">
+      <div class="quiz-q">Как сейчас принимаете заказы?</div>
+      <div class="quiz-opts-col">
+        <button class="quiz-opt" data-q="2" data-val="По телефону">📞 По телефону</button>
+        <button class="quiz-opt" data-q="2" data-val="В соцсетях / мессенджерах">💬 В соцсетях / мессенджерах</button>
+        <button class="quiz-opt" data-q="2" data-val="Только на кассе">📝 Только на кассе</button>
+        <button class="quiz-opt" data-q="2" data-val="Пока никак">🚫 Пока никак</button>
+      </div>
+    </div>
+    <!-- Step 3 -->
+    <div class="quiz-step" id="qs3">
+      <div class="quiz-q">Сколько заказов в день примерно?</div>
+      <div class="quiz-opts-row">
+        <button class="quiz-opt" data-q="3" data-val="до 10">До 10</button>
+        <button class="quiz-opt" data-q="3" data-val="10–50">10–50</button>
+        <button class="quiz-opt" data-q="3" data-val="50–100">50–100</button>
+        <button class="quiz-opt" data-q="3" data-val="100+">100+</button>
+      </div>
+    </div>
+    <!-- Step 4 -->
+    <div class="quiz-step" id="qs4">
+      <div class="quiz-q">Из какого вы города?</div>
+      <input class="quiz-input" id="quizCity" type="text" placeholder="Например: Казань">
+      <button class="quiz-submit" id="quizSubmit">Отправить заявку в Telegram →</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ STICKY MOBILE CTA ═══ -->
 <div class="sticky-cta" id="stickyCta">
   <div class="sticky-cta__text">
     <div class="sticky-cta__title">Запустить бесплатно</div>
     <div class="sticky-cta__sub">первая акция бесплатно</div>
   </div>
-  <a href="https://t.me/FerMama?start=landing" target="_blank" rel="noopener" class="sticky-cta__btn">
+  <a href="#" class="sticky-cta__btn quiz-trigger">
     Написать →
   </a>
 </div>
 
 <script>
+  // ── Quiz ──
+  const answers = {};
+  let currentStep = 1;
+  const totalSteps = 4;
+  const overlay = document.getElementById('quizOverlay');
+
+  function openQuiz(e) {
+    if (e) e.preventDefault();
+    answers[1] = answers[2] = answers[3] = answers[4] = null;
+    currentStep = 1;
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('qs1').classList.add('active');
+    document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('picked'));
+    document.getElementById('quizCity').value = '';
+    document.getElementById('otherBizInput').value = '';
+    document.getElementById('otherBizWrap').style.display = 'none';
+    updateProgress();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeQuiz() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function updateProgress() {
+    const pct = (currentStep / totalSteps) * 100;
+    document.getElementById('quizFill').style.width = pct + '%';
+    document.getElementById('quizLabel').textContent = 'Шаг ' + currentStep + ' из ' + totalSteps;
+  }
+
+  function goToStep(n) {
+    document.getElementById('qs' + currentStep).classList.remove('active');
+    currentStep = n;
+    document.getElementById('qs' + currentStep).classList.add('active');
+    updateProgress();
+  }
+
+  // Option clicks (steps 1-3)
+  document.querySelectorAll('.quiz-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.dataset.q;
+      document.querySelectorAll('.quiz-opt[data-q="' + q + '"]').forEach(b => b.classList.remove('picked'));
+      btn.classList.add('picked');
+      answers[q] = btn.dataset.val;
+      // "Другое" на шаге 1 — показать поле ввода
+      if (q === '1' && btn.id === 'optOther') {
+        document.getElementById('otherBizWrap').style.display = 'block';
+        document.getElementById('otherBizInput').focus();
+      } else {
+        document.getElementById('otherBizWrap').style.display = 'none';
+        setTimeout(() => goToStep(parseInt(q) + 1), 280);
+      }
+    });
+  });
+
+  // "Другое" — кнопка Далее
+  document.getElementById('otherBizNext').addEventListener('click', () => {
+    const val = document.getElementById('otherBizInput').value.trim();
+    if (!val) { document.getElementById('otherBizInput').focus(); return; }
+    answers[1] = val;
+    document.getElementById('otherBizWrap').style.display = 'none';
+    goToStep(2);
+  });
+  document.getElementById('otherBizInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('otherBizNext').click();
+  });
+
+  // Submit
+  document.getElementById('quizSubmit').addEventListener('click', () => {
+    const city = document.getElementById('quizCity').value.trim() || 'не указан';
+    const msg = encodeURIComponent(
+      'Здравствуйте! Пишу с сайта.\n' +
+      'Бизнес: ' + (answers[1] || '—') + '\n' +
+      'Заказы сейчас: ' + (answers[2] || '—') + '\n' +
+      'Заказов в день: ' + (answers[3] || '—') + '\n' +
+      'Город: ' + city + '\n\n' +
+      'Хочу узнать про Mini App для предзаказов.'
+    );
+    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+    const url = isMobile
+      ? 'tg://resolve?domain=FerMama&text=' + msg
+      : 'https://t.me/FerMama?text=' + msg;
+    closeQuiz();
+    window.open(url, '_blank');
+  });
+
+  // Close handlers
+  document.getElementById('quizClose').addEventListener('click', closeQuiz);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeQuiz(); });
+
+  // Attach quiz to all CTA buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.quiz-trigger').forEach(el => {
+      el.addEventListener('click', openQuiz);
+    });
+  });
+
   // ── Navbar scroll ──
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
