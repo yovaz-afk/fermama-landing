@@ -270,6 +270,10 @@
     <button class="ptab" onclick="showScreen(5)">Клиенты</button>
     <button class="ptab" onclick="showScreen(6)">Реф. ссылки</button>
     <button class="ptab" onclick="showScreen(7)">Заказ в TG</button>
+    <button class="ptab" onclick="showScreen(8)">Корзина</button>
+    <button class="ptab" onclick="showScreen(9)">Доставка</button>
+    <button class="ptab" onclick="showScreen(10)">Подтверждение</button>
+    <button class="ptab" onclick="showScreen(11)">Админ</button>
   </div>
 
   <div class="phone-frame active" id="sc0">
@@ -295,6 +299,18 @@
   </div>
   <div class="phone-frame" id="sc7">
     <img src="img/screen-order.jpg" alt="Уведомление о заказе">
+  </div>
+  <div class="phone-frame" id="sc8">
+    <img src="img/screen-cart.jpg" alt="Корзина">
+  </div>
+  <div class="phone-frame" id="sc9">
+    <img src="img/screen-delivery.jpg" alt="Самовывоз или доставка">
+  </div>
+  <div class="phone-frame" id="sc10">
+    <img src="img/screen-confirm.jpg" alt="Подтверждение заказа клиенту">
+  </div>
+  <div class="phone-frame" id="sc11">
+    <img src="img/screen-admin.jpg" alt="Админ панель">
   </div>
   <p class="phone-cap" id="sc-cap">Экран акции с предзаказом</p>
 </div>
@@ -355,6 +371,106 @@
       <div class="feat-item"><div class="feat-check">✓</div><span><strong>Шаблон для скачивания</strong> — заполните и загрузите готовое</span></div>
       <div class="feat-item"><div class="feat-check">✓</div><span><strong>Поиск и фильтр по категориям</strong> — быстро найти нужный товар</span></div>
       <div class="feat-item"><div class="feat-check">✓</div><span><strong>Добавление по одному</strong> — тоже доступно прямо в интерфейсе</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ОФОРМЛЕНИЕ ЗАКАЗА -->
+<section>
+  <p class="sec-label reveal">Оформление заказа</p>
+  <h2 class="reveal">Корзина — просто<br>и понятно</h2>
+  <p class="lead reveal">Клиент видит состав заказа, итоговую сумму и экономию от акции. Одна кнопка — заказ оформлен.</p>
+  <div class="feature-showcase reveal">
+    <div class="phone-frame active" style="max-width:280px;margin:28px auto 0;">
+      <img src="img/screen-cart.jpg" alt="Корзина с товарами">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Список товаров с фото</strong> — количество, цена, скидка</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Итог с экономией</strong> — клиент видит сколько выиграл от акции</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Допродажа</strong> — блок «Добавьте к заказу» увеличивает средний чек</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Подтверждение одной кнопкой</strong> — без регистраций и паролей</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- САМОВЫВОЗ / ДОСТАВКА -->
+<section>
+  <p class="sec-label reveal">Способ получения</p>
+  <h2 class="reveal">Самовывоз или доставка —<br>клиент выбирает сам</h2>
+  <p class="lead reveal">В момент оформления клиент выбирает удобный способ получения и нужный адрес магазина. Всё в одном экране.</p>
+  <div class="feature-showcase reveal">
+    <div class="phone-frame active" style="max-width:280px;margin:28px auto 0;">
+      <img src="img/screen-delivery.jpg" alt="Выбор самовывоза или доставки">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Самовывоз</strong> — выбор из ваших точек на карте</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Доставка</strong> — клиент вводит адрес, вы видите его в заказе</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Несколько адресов</strong> — все ваши точки сразу в списке</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Итог пересчитывается</strong> — клиент всегда видит финальную сумму</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ЗАКАЗЫ В ЧАТ КОМАНДЫ -->
+<section>
+  <p class="sec-label reveal">Уведомления команде</p>
+  <h2 class="reveal">Каждый заказ мгновенно<br>в ваш Telegram</h2>
+  <p class="lead reveal">Как только клиент оформил заказ — в ваш рабочий чат прилетает полная карточка: имя, телефон, состав, сумма, дата и время доставки.</p>
+  <div class="feature-showcase reveal">
+    <div class="phone-frame active" style="max-width:280px;margin:28px auto 0;">
+      <img src="img/screen-order.jpg" alt="Заказ в чате команды">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Контакты клиента</strong> — имя и телефон сразу в сообщении</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Полный состав заказа</strong> — каждый товар с количеством и ценой</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Дата и время доставки</strong> — ничего не нужно уточнять по телефону</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Способ оплаты</strong> — картой или наличными — видно сразу</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ПОДТВЕРЖДЕНИЕ КЛИЕНТУ -->
+<section>
+  <p class="sec-label reveal">Коммуникация с клиентом</p>
+  <h2 class="reveal">Клиент получает подтверждение<br>автоматически</h2>
+  <p class="lead reveal">Сразу после оформления в бот приходит персонализированное сообщение с номером заказа, составом и деталями доставки. Без участия менеджера.</p>
+  <div class="feature-showcase reveal">
+    <div style="max-width:400px;margin:28px auto 0;background:#1a2733;border-radius:18px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.6);">
+      <img src="img/screen-confirm.jpg" alt="Подтверждение заказа клиенту" style="width:100%;display:block;">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Имя клиента в сообщении</strong> — персонализировано автоматически</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Номер заказа</strong> — для обращений в поддержку</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Состав и итоговая сумма</strong> — всё в одном сообщении</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Ссылка для связи</strong> — если клиент хочет изменить заказ</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- АНАЛИТИКА / АДМИН ПАНЕЛЬ -->
+<section>
+  <p class="sec-label reveal">Аналитика и управление</p>
+  <h2 class="reveal">Своя админ-панель —<br>всё в одном месте</h2>
+  <p class="lead reveal">Полный контроль над бизнесом прямо в приложении. Настраивайте акции, управляйте каталогом, смотрите аналитику — без сторонних сервисов.</p>
+  <div class="feature-showcase reveal">
+    <div class="phone-frame active" style="max-width:280px;margin:28px auto 0;">
+      <img src="img/screen-admin.jpg" alt="Админ панель">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Товары и категории</strong> — добавляйте и редактируйте ассортимент</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Заказы в реальном времени</strong> — статусы, история, фильтры</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Аналитика</strong> — выручка, заказы, доставка vs самовывоз</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Настройки под любую акцию</strong> — даты, скидки, товары — всё гибко</span></div>
     </div>
   </div>
 </section>
@@ -506,7 +622,11 @@
     "Рассылка всем клиентам в Telegram",
     "База клиентов с историей заказов",
     "Реферальные ссылки по каналам",
-    "Уведомление о новом заказе в Telegram"
+    "Уведомление о новом заказе в Telegram",
+    "Корзина — состав заказа и итоговая сумма",
+    "Выбор самовывоза или доставки",
+    "Автоматическое подтверждение заказа клиенту",
+    "Полная админ-панель управления"
   ];
   function showScreen(i) {
     document.querySelectorAll('.phone-frame').forEach((f,j) => f.classList.toggle('active', j===i));
