@@ -279,24 +279,25 @@
   <div class="carousel-body">
     <button class="c-arrow" id="sc-prev">&#8592;</button>
     <div id="sc-frames">
-      <div class="phone-frame active"><img src="img/screen-promo.jpg" alt="Экран акции"></div>
+      <div class="phone-frame active"><img src="img/screen-promo.jpg" alt="Главный экран"></div>
       <div class="phone-frame"><img src="img/screen-catalog.jpg" alt="Каталог"></div>
-      <div class="phone-frame"><img src="img/screen-products.jpg" alt="Товары"></div>
-      <div class="phone-frame"><img src="img/screen-analytics.jpg" alt="Аналитика"></div>
-      <div class="phone-frame"><img src="img/screen-mailing.jpg" alt="Рассылка"></div>
-      <div class="phone-frame"><img src="img/screen-clients.jpg" alt="Клиенты"></div>
-      <div class="phone-frame"><img src="img/screen-referrals.jpg" alt="Реф. ссылки"></div>
-      <div class="phone-frame"><img src="img/screen-order.jpg" alt="Заказ в TG"></div>
+      <div class="phone-frame"><img src="img/screen-products.jpg" alt="Выбор товара"></div>
       <div class="phone-frame"><img src="img/screen-cart.jpg" alt="Корзина"></div>
       <div class="phone-frame"><img src="img/screen-delivery.jpg" alt="Доставка"></div>
-      <div class="phone-frame"><img src="img/screen-confirm.jpg" alt="Подтверждение"></div>
-      <div class="phone-frame"><img src="img/screen-admin.jpg" alt="Админ"></div>
+      <div class="phone-frame"><img src="img/screen-admin.jpg" alt="Админ панель"></div>
+      <div class="phone-frame"><img src="img/screen-analytics.jpg" alt="Аналитика"></div>
+      <div class="phone-frame"><img src="img/screen-referrals.jpg" alt="Реф. ссылки"></div>
+      <div class="phone-frame"><img src="img/screen-import.jpg" alt="Импорт товаров"></div>
+      <div class="phone-frame"><img src="img/screen-clients.jpg" alt="Клиенты"></div>
+      <div class="phone-frame"><img src="img/screen-mailing.jpg" alt="Рассылка"></div>
+      <div class="phone-frame"><img src="img/screen-order.jpg" alt="Чат команды"></div>
+      <div class="phone-frame"><img src="img/screen-confirm.jpg" alt="Автосообщение"></div>
     </div>
     <button class="c-arrow" id="sc-next">&#8594;</button>
   </div>
   <div class="c-meta">
     <span class="c-cap" id="sc-cap">Экран акции с предзаказом</span>
-    <span class="c-counter" id="sc-ctr">1 / 12</span>
+    <span class="c-counter" id="sc-ctr">1 / 13</span>
   </div>
   <div class="c-dots" id="sc-dots"></div>
 </div>
@@ -601,18 +602,19 @@
 <script>
   // Carousel
   const caps = [
-    "Экран акции с предзаказом",
+    "Главный экран — акции и предзаказы",
     "Каталог категорий",
-    "Список товаров с импортом из Excel",
-    "Аналитика заказов",
-    "Рассылка всем клиентам в Telegram",
-    "База клиентов с историей заказов",
-    "Реферальные ссылки по каналам",
-    "Уведомление о новом заказе в Telegram",
+    "Выбор товара — фото, цена, описание",
     "Корзина — состав заказа и итоговая сумма",
-    "Самовывоз или доставка",
-    "Автоматическое подтверждение заказа клиенту",
-    "Полная админ-панель управления"
+    "Самовывоз или доставка — клиент выбирает сам",
+    "Полная админ-панель управления",
+    "Аналитика — выручка, заказы, динамика",
+    "Реферальные ссылки по каналам",
+    "Импорт каталога из Excel",
+    "База клиентов с историей заказов",
+    "Рассылка всем клиентам в Telegram",
+    "Уведомление о новом заказе в чат команды",
+    "Автоматическое подтверждение заказа клиенту"
   ];
   const frames = document.querySelectorAll('#sc-frames .phone-frame');
   const capEl  = document.getElementById('sc-cap');
