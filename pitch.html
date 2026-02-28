@@ -82,30 +82,45 @@
 
   /* ── PHONE SHOWCASE ── */
   .phone-showcase { padding: 0 24px 56px; max-width: 600px; margin: 0 auto; }
-  .phone-tabs {
-    display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto;
-    padding-bottom: 4px; scrollbar-width: none;
+  .carousel-body {
+    display: flex; align-items: center; gap: 14px; justify-content: center; margin-top: 28px;
   }
-  .phone-tabs::-webkit-scrollbar { display: none; }
-  .ptab {
-    flex-shrink: 0; padding: 8px 18px; border-radius: 20px; border: 1px solid var(--bdr);
-    background: var(--bg3); color: var(--muted); font-size: .82rem; cursor: pointer;
-    transition: all .2s; white-space: nowrap;
+  .c-arrow {
+    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+    background: var(--bg3); border: 1px solid var(--bdr);
+    color: var(--muted); font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .18s;
   }
-  .ptab.active { background: var(--a1); color: #0d0b0a; border-color: var(--a1); font-weight: 700; }
+  .c-arrow:hover { background: rgba(245,166,35,.15); border-color: rgba(245,166,35,.35); color: var(--a1); }
+  .c-arrow:disabled { opacity: .25; pointer-events: none; }
   .phone-frame {
     background: #111; border: 2px solid #2a2a2a;
     border-radius: 36px; overflow: hidden;
     box-shadow: 0 32px 80px rgba(0,0,0,.7);
-    max-width: 300px; margin: 0 auto;
+    width: 240px; flex-shrink: 0;
     display: none;
   }
   .phone-frame.active { display: block; }
   .phone-frame img { width: 100%; display: block; }
-  .phone-cap {
-    text-align: center; margin-top: 16px;
-    font-size: .85rem; color: var(--muted);
+  .c-meta {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin-top: 18px;
   }
+  .c-cap { font-size: .84rem; color: var(--muted); }
+  .c-counter {
+    font-size: .72rem; font-weight: 700; color: var(--a1);
+    background: rgba(245,166,35,.1); border: 1px solid rgba(245,166,35,.2);
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .c-dots { display: flex; gap: 7px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+  .c-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,.1); border: none; padding: 0;
+    cursor: pointer; transition: all .2s;
+  }
+  .c-dot.active { background: var(--a1); transform: scale(1.35); }
+  .c-dot:hover:not(.active) { background: rgba(245,166,35,.4); }
 
   /* ── VALUE CARDS ── */
   .val-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
@@ -261,58 +276,29 @@
 <!-- SCREENSHOTS -->
 <div class="phone-showcase">
   <p class="sec-label" style="text-align:center;margin-top:32px;">Как это выглядит</p>
-  <div class="phone-tabs">
-    <button class="ptab active" onclick="showScreen(0)">Акции</button>
-    <button class="ptab" onclick="showScreen(1)">Каталог</button>
-    <button class="ptab" onclick="showScreen(2)">Товары</button>
-    <button class="ptab" onclick="showScreen(3)">Аналитика</button>
-    <button class="ptab" onclick="showScreen(4)">Рассылка</button>
-    <button class="ptab" onclick="showScreen(5)">Клиенты</button>
-    <button class="ptab" onclick="showScreen(6)">Реф. ссылки</button>
-    <button class="ptab" onclick="showScreen(7)">Заказ в TG</button>
-    <button class="ptab" onclick="showScreen(8)">Корзина</button>
-    <button class="ptab" onclick="showScreen(9)">Доставка</button>
-    <button class="ptab" onclick="showScreen(10)">Подтверждение</button>
-    <button class="ptab" onclick="showScreen(11)">Админ</button>
+  <div class="carousel-body">
+    <button class="c-arrow" id="sc-prev">&#8592;</button>
+    <div id="sc-frames">
+      <div class="phone-frame active"><img src="img/screen-promo.jpg" alt="Экран акции"></div>
+      <div class="phone-frame"><img src="img/screen-catalog.jpg" alt="Каталог"></div>
+      <div class="phone-frame"><img src="img/screen-products.jpg" alt="Товары"></div>
+      <div class="phone-frame"><img src="img/screen-analytics.jpg" alt="Аналитика"></div>
+      <div class="phone-frame"><img src="img/screen-mailing.jpg" alt="Рассылка"></div>
+      <div class="phone-frame"><img src="img/screen-clients.jpg" alt="Клиенты"></div>
+      <div class="phone-frame"><img src="img/screen-referrals.jpg" alt="Реф. ссылки"></div>
+      <div class="phone-frame"><img src="img/screen-order.jpg" alt="Заказ в TG"></div>
+      <div class="phone-frame"><img src="img/screen-cart.jpg" alt="Корзина"></div>
+      <div class="phone-frame"><img src="img/screen-delivery.jpg" alt="Доставка"></div>
+      <div class="phone-frame"><img src="img/screen-confirm.jpg" alt="Подтверждение"></div>
+      <div class="phone-frame"><img src="img/screen-admin.jpg" alt="Админ"></div>
+    </div>
+    <button class="c-arrow" id="sc-next">&#8594;</button>
   </div>
-
-  <div class="phone-frame active" id="sc0">
-    <img src="img/screen-promo.jpg" alt="Экран акции">
+  <div class="c-meta">
+    <span class="c-cap" id="sc-cap">Экран акции с предзаказом</span>
+    <span class="c-counter" id="sc-ctr">1 / 12</span>
   </div>
-  <div class="phone-frame" id="sc1">
-    <img src="img/screen-catalog.jpg" alt="Каталог">
-  </div>
-  <div class="phone-frame" id="sc2">
-    <img src="img/screen-products.jpg" alt="Товары">
-  </div>
-  <div class="phone-frame" id="sc3">
-    <img src="img/screen-analytics.jpg" alt="Аналитика">
-  </div>
-  <div class="phone-frame" id="sc4">
-    <img src="img/screen-mailing.jpg" alt="Рассылка">
-  </div>
-  <div class="phone-frame" id="sc5">
-    <img src="img/screen-clients.jpg" alt="Клиенты">
-  </div>
-  <div class="phone-frame" id="sc6">
-    <img src="img/screen-referrals.jpg" alt="Реферальные ссылки">
-  </div>
-  <div class="phone-frame" id="sc7">
-    <img src="img/screen-order.jpg" alt="Уведомление о заказе">
-  </div>
-  <div class="phone-frame" id="sc8">
-    <img src="img/screen-cart.jpg" alt="Корзина">
-  </div>
-  <div class="phone-frame" id="sc9">
-    <img src="img/screen-delivery.jpg" alt="Самовывоз или доставка">
-  </div>
-  <div class="phone-frame" id="sc10">
-    <img src="img/screen-confirm.jpg" alt="Подтверждение заказа клиенту">
-  </div>
-  <div class="phone-frame" id="sc11">
-    <img src="img/screen-admin.jpg" alt="Админ панель">
-  </div>
-  <p class="phone-cap" id="sc-cap">Экран акции с предзаказом</p>
+  <div class="c-dots" id="sc-dots"></div>
 </div>
 
 <hr class="div">
@@ -613,7 +599,7 @@
 </footer>
 
 <script>
-  // Screen switcher
+  // Carousel
   const caps = [
     "Экран акции с предзаказом",
     "Каталог категорий",
@@ -624,15 +610,49 @@
     "Реферальные ссылки по каналам",
     "Уведомление о новом заказе в Telegram",
     "Корзина — состав заказа и итоговая сумма",
-    "Выбор самовывоза или доставки",
+    "Самовывоз или доставка",
     "Автоматическое подтверждение заказа клиенту",
     "Полная админ-панель управления"
   ];
-  function showScreen(i) {
-    document.querySelectorAll('.phone-frame').forEach((f,j) => f.classList.toggle('active', j===i));
-    document.querySelectorAll('.ptab').forEach((t,j) => t.classList.toggle('active', j===i));
-    document.getElementById('sc-cap').textContent = caps[i];
+  const frames = document.querySelectorAll('#sc-frames .phone-frame');
+  const capEl  = document.getElementById('sc-cap');
+  const ctrEl  = document.getElementById('sc-ctr');
+  const dotsEl = document.getElementById('sc-dots');
+  const prevBtn = document.getElementById('sc-prev');
+  const nextBtn = document.getElementById('sc-next');
+  let cur = 0;
+
+  // Build dots
+  caps.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'c-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  });
+
+  function go(i) {
+    frames[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+    cur = i;
+    frames[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    capEl.textContent = caps[cur];
+    ctrEl.textContent = (cur + 1) + ' / ' + caps.length;
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === caps.length - 1;
   }
+
+  prevBtn.addEventListener('click', () => cur > 0 && go(cur - 1));
+  nextBtn.addEventListener('click', () => cur < caps.length - 1 && go(cur + 1));
+  go(0);
+
+  // Swipe
+  let _tx = 0;
+  document.getElementById('sc-frames').addEventListener('touchstart', e => _tx = e.touches[0].clientX, {passive:true});
+  document.getElementById('sc-frames').addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - _tx;
+    if (Math.abs(dx) > 40) dx < 0 ? go(Math.min(cur+1, caps.length-1)) : go(Math.max(cur-1, 0));
+  });
 
   // Reveal on scroll
   const obs = new IntersectionObserver(entries => {
