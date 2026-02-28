@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ФерМама — Telegram Mini App для вашего бизнеса</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:    #0d0b0a;
+    --bg2:   #141110;
+    --bg3:   #1c1814;
+    --a1:    #f5a623;
+    --a2:    #e8793a;
+    --txt:   #f2ede8;
+    --muted: #a89880;
+    --dim:   #6b5c4a;
+    --bdr:   rgba(255,255,255,.07);
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--txt);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,11,10,.92); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--bdr);
+    padding: 0 24px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Geologica', sans-serif; font-weight: 900;
+    font-size: 1.1rem; color: var(--txt); text-decoration: none;
+  }
+  .nav-logo img { height: 28px; width: 28px; border-radius: 50%; object-fit: cover; }
+  .nav-logo span { color: var(--a1); }
+  .nav-tag {
+    font-size: .72rem; color: var(--muted);
+    background: var(--bg3); border: 1px solid var(--bdr);
+    padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 64px 24px; max-width: 600px; margin: 0 auto; }
+  .sec-label {
+    font-size: .68rem; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--a1); margin-bottom: 10px;
+  }
+  h2 {
+    font-family: 'Geologica', sans-serif; font-weight: 900;
+    font-size: clamp(1.7rem, 5vw, 2.4rem); line-height: 1.18;
+    margin-bottom: 16px;
+  }
+  .lead { font-size: 1.05rem; color: var(--muted); line-height: 1.65; }
+  hr.div { border: none; border-top: 1px solid var(--bdr); margin: 0; }
+
+  /* ── HERO ── */
+  .hero { padding: 56px 24px 48px; max-width: 600px; margin: 0 auto; text-align: center; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--bg3); border: 1px solid rgba(245,166,35,.25);
+    padding: 6px 16px; border-radius: 20px; font-size: .8rem;
+    color: var(--a1); margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Geologica', sans-serif; font-weight: 900;
+    font-size: clamp(2rem, 7vw, 3rem); line-height: 1.12;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--a1); }
+  .hero-sub { font-size: 1.05rem; color: var(--muted); line-height: 1.6; margin-bottom: 32px; }
+
+  /* ── PHONE SHOWCASE ── */
+  .phone-showcase { padding: 0 24px 56px; max-width: 600px; margin: 0 auto; }
+  .phone-tabs {
+    display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto;
+    padding-bottom: 4px; scrollbar-width: none;
+  }
+  .phone-tabs::-webkit-scrollbar { display: none; }
+  .ptab {
+    flex-shrink: 0; padding: 8px 18px; border-radius: 20px; border: 1px solid var(--bdr);
+    background: var(--bg3); color: var(--muted); font-size: .82rem; cursor: pointer;
+    transition: all .2s; white-space: nowrap;
+  }
+  .ptab.active { background: var(--a1); color: #0d0b0a; border-color: var(--a1); font-weight: 700; }
+  .phone-frame {
+    background: #111; border: 2px solid #2a2a2a;
+    border-radius: 36px; overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,.7);
+    max-width: 300px; margin: 0 auto;
+    display: none;
+  }
+  .phone-frame.active { display: block; }
+  .phone-frame img { width: 100%; display: block; }
+  .phone-cap {
+    text-align: center; margin-top: 16px;
+    font-size: .85rem; color: var(--muted);
+  }
+
+  /* ── VALUE CARDS ── */
+  .val-grid { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+  .val-card {
+    background: var(--bg2); border: 1px solid var(--bdr);
+    border-radius: 18px; padding: 22px 20px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .val-icon {
+    width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .ic-g { background: rgba(245,166,35,.12); }
+  .ic-o { background: rgba(232,121,58,.12); }
+  .ic-b { background: rgba(42,171,238,.12); }
+  .val-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 5px; }
+  .val-card p  { font-size: .88rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+  .step {
+    display: flex; gap: 18px; padding-bottom: 28px; position: relative;
+  }
+  .step:not(:last-child)::before {
+    content: ''; position: absolute;
+    left: 19px; top: 44px; width: 2px;
+    height: calc(100% - 20px);
+    background: linear-gradient(to bottom, var(--a1), transparent);
+  }
+  .step-num {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--a1), var(--a2));
+    color: #0d0b0a; font-weight: 900; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Geologica', sans-serif;
+  }
+  .step-body { padding-top: 8px; }
+  .step-body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .step-body p  { font-size: .88rem; color: var(--muted); line-height: 1.55; }
+
+  /* ── CASE BLOCK ── */
+  .case-box {
+    background: var(--bg2); border: 1px solid rgba(245,166,35,.18);
+    border-radius: 22px; padding: 28px 24px; margin-top: 28px;
+  }
+  .case-tag {
+    display: inline-block; font-size: .72rem; background: rgba(245,166,35,.1);
+    color: var(--a1); padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 14px; font-weight: 600;
+  }
+  .case-box h3 { font-family: 'Geologica', sans-serif; font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
+  .case-box p  { font-size: .9rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+  .stat-item { background: rgba(245,166,35,.06); border: 1px solid rgba(245,166,35,.12); border-radius: 14px; padding: 14px; }
+  .stat-val { font-family: 'Geologica', sans-serif; font-size: 1.5rem; font-weight: 900; color: var(--a1); }
+  .stat-lbl { font-size: .75rem; color: var(--dim); margin-top: 3px; }
+  .analytics-img {
+    width: 100%; border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5), 0 0 0 1px rgba(245,166,35,.12);
+    filter: brightness(.9);
+  }
+
+  /* ── FEATURES LIST ── */
+  .feat-list { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+  .feat-item {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg2); border: 1px solid var(--bdr);
+    border-radius: 14px; padding: 14px 16px;
+  }
+  .feat-check {
+    width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+    background: rgba(50,180,120,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .9rem;
+  }
+  .feat-item span { font-size: .92rem; line-height: 1.4; }
+
+  /* ── PRICING ── */
+  .price-card {
+    background: var(--bg2); border: 1px solid var(--bdr);
+    border-radius: 22px; padding: 28px 24px; margin-top: 28px;
+  }
+  .price-card.featured { border-color: var(--a1); }
+  .price-tag { font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--a1); margin-bottom: 10px; }
+  .price-name { font-family: 'Geologica', sans-serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; }
+  .price-val { font-family: 'Geologica', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--a1); }
+  .price-val sup { font-size: 1rem; }
+  .price-period { font-size: .82rem; color: var(--muted); margin-bottom: 4px; }
+  .price-setup { font-size: .85rem; color: var(--muted); margin-bottom: 20px; }
+  .price-setup strong { color: var(--txt); }
+  .price-divider { border: none; border-top: 1px solid var(--bdr); margin: 16px 0; }
+  .price-features { display: flex; flex-direction: column; gap: 8px; }
+  .price-feat { display: flex; align-items: center; gap: 10px; font-size: .88rem; }
+  .price-feat::before { content: '✓'; color: var(--a1); font-weight: 700; flex-shrink: 0; }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: linear-gradient(135deg, rgba(245,166,35,.1), rgba(232,121,58,.08));
+    border: 1px solid rgba(245,166,35,.2);
+    border-radius: 24px; padding: 36px 24px; margin-top: 28px;
+    text-align: center;
+  }
+  .cta-block h2 { font-size: clamp(1.4rem,5vw,2rem); margin-bottom: 12px; }
+  .cta-block p  { color: var(--muted); margin-bottom: 28px; font-size: .95rem; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--a1), var(--a2));
+    color: #0d0b0a; font-weight: 800; font-size: 1rem;
+    padding: 16px 32px; border-radius: 40px; text-decoration: none;
+    font-family: 'Geologica', sans-serif;
+  }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--a1); font-weight: 700; font-size: .92rem;
+    padding: 14px 28px; border-radius: 40px; text-decoration: none;
+    border: 1px solid rgba(245,166,35,.35); margin-top: 12px;
+  }
+  .cta-btns { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .partner-note { font-size: .8rem; color: var(--dim); margin-top: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--bdr); padding: 28px 24px;
+    text-align: center; max-width: 600px; margin: 0 auto;
+  }
+  footer p { font-size: .8rem; color: var(--dim); }
+
+  /* ── ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s ease, transform .55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <img src="img/fermama-logo.png" alt="ФерМама">
+    Фер<span>Мама</span>
+  </a>
+  <div class="nav-tag">Telegram Mini App</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">⚡ Уже работает в реальном бизнесе</div>
+  <h1 class="reveal">Клиенты делают<br><span>предзаказы в Telegram</span><br>сами</h1>
+  <p class="hero-sub reveal">Без сайта, кассира и лишних звонков.<br>Вы получаете заявку — клиент видит статус.</p>
+</div>
+
+<hr class="div">
+
+<!-- SCREENSHOTS -->
+<div class="phone-showcase">
+  <p class="sec-label" style="text-align:center;margin-top:32px;">Как это выглядит</p>
+  <div class="phone-tabs">
+    <button class="ptab active" onclick="showScreen(0)">Акции</button>
+    <button class="ptab" onclick="showScreen(1)">Каталог</button>
+    <button class="ptab" onclick="showScreen(2)">Товары</button>
+    <button class="ptab" onclick="showScreen(3)">Аналитика</button>
+  </div>
+
+  <div class="phone-frame active" id="sc0">
+    <img src="img/screen-promo.jpg" alt="Экран акции">
+  </div>
+  <div class="phone-frame" id="sc1">
+    <img src="img/screen-catalog.jpg" alt="Каталог">
+  </div>
+  <div class="phone-frame" id="sc2">
+    <img src="img/screen-products.jpg" alt="Товары">
+  </div>
+  <div class="phone-frame" id="sc3">
+    <img src="img/screen-analytics.jpg" alt="Аналитика">
+  </div>
+  <p class="phone-cap" id="sc-cap">Экран акции с предзаказом</p>
+</div>
+
+<hr class="div">
+
+<!-- ЧТО УМЕЕТ -->
+<section>
+  <p class="sec-label reveal">Возможности</p>
+  <h2 class="reveal">Что умеет<br>приложение</h2>
+  <div class="feat-list reveal">
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Акции с ограниченным временем</strong> — клиент видит таймер и спешит оформить</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Каталог товаров</strong> — категории, фото, цены, описания</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Предзаказ за 30 секунд</strong> — клиент выбирает, жмёт кнопку, всё</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Самовывоз или доставка</strong> — клиент выбирает удобный способ</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Уведомление владельцу</strong> — заявка мгновенно приходит в Telegram команды</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Аналитика заказов</strong> — выручка, кол-во заказов, доставка vs самовывоз</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>База клиентов</strong> — история, контакты, без сторонних CRM</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Реферальные ссылки</strong> — считайте откуда пришёл клиент</span></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- КАК РАБОТАЕТ -->
+<section>
+  <p class="sec-label reveal">Процесс</p>
+  <h2 class="reveal">Как это работает<br>для клиента</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Владелец запускает акцию</h3>
+        <p>Вы создаёте акцию в Mini App — название, товар, цена, дата. Одна кнопка.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Публикуете ссылку</h3>
+        <p>В своём Telegram-канале, ВКонтакте или QR-код на кассе. Клиенты переходят в бот.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Клиент делает предзаказ</h3>
+        <p>Выбирает товар, нажимает «Предзаказать». Без звонков, без путаницы, за 30 секунд.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Вы видите все заявки</h3>
+        <p>Уведомление в Telegram, аналитика в приложении. Закупаете ровно столько — сколько заказали.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- КЕЙС -->
+<section>
+  <p class="sec-label reveal">Живой результат</p>
+  <h2 class="reveal">Реальный кейс —<br>наш собственный бизнес</h2>
+  <div class="case-box reveal">
+    <span class="case-tag">ФерМама · Мясной магазин · Йошкар-Ола</span>
+    <h3>Запустили «Мясной день» через Telegram — разобрались за 2 дня</h3>
+    <p>Раньше закупали мясо «на глаз»: то излишки, то дефицит. После запуска Mini App клиенты делают предзаказ заранее — точно знаем спрос.</p>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-val">53 564 ₽</div>
+        <div class="stat-lbl">выручка за акцию</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">17</div>
+        <div class="stat-lbl">предзаказов за 2 дня</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">0</div>
+        <div class="stat-lbl">потерянных заказов</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">2 мин</div>
+        <div class="stat-lbl">среднее время оформления</div>
+      </div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px;">Аналитика в реальном времени — прямо в приложении:</p>
+    <img src="img/screen-analytics.jpg" class="analytics-img" alt="Аналитика">
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ДЛЯ КОГО -->
+<section>
+  <p class="sec-label reveal">Для кого</p>
+  <h2 class="reveal">Подойдёт любому<br>food-бизнесу</h2>
+  <div class="val-grid reveal">
+    <div class="val-card"><div class="val-icon ic-g">🥩</div><div><h3>Мясные магазины</h3><p>Акции, «мясные дни», предзаказ к праздникам — клиент бронирует заранее.</p></div></div>
+    <div class="val-card"><div class="val-icon ic-o">🥐</div><div><h3>Пекарни</h3><p>Заказы на выпечку наперёд, подписка на свежий хлеб, акции выходного дня.</p></div></div>
+    <div class="val-card"><div class="val-icon ic-b">☕</div><div><h3>Кафе и рестораны</h3><p>Предзаказ на самовывоз, акции дня, сезонное меню — без звонков и ожидания.</p></div></div>
+    <div class="val-card"><div class="val-icon ic-g">🚚</div><div><h3>Доставка еды</h3><p>Оформление заказа прямо в Telegram — без стороннего агрегатора и его комиссий.</p></div></div>
+    <div class="val-card"><div class="val-icon ic-o">🌾</div><div><h3>Фермерские хозяйства</h3><p>Еженедельные наборы, сезонные продукты, лояльная база постоянных клиентов.</p></div></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ЦЕНА -->
+<section>
+  <p class="sec-label reveal">Стоимость</p>
+  <h2 class="reveal">Простые и честные<br>условия</h2>
+  <div class="price-card featured reveal">
+    <div class="price-tag">Самый популярный</div>
+    <div class="price-name">Бизнес</div>
+    <div class="price-val">4 900 ₽</div>
+    <div class="price-period">в месяц · до 500 заказов</div>
+    <div class="price-setup">+ разовая настройка <strong>20 000 ₽</strong></div>
+    <hr class="price-divider">
+    <div class="price-features">
+      <div class="price-feat">Настройка под ваш бренд (цвета, лого, ассортимент)</div>
+      <div class="price-feat">Каталог без ограничений по товарам</div>
+      <div class="price-feat">Акции и предзаказы</div>
+      <div class="price-feat">Аналитика и база клиентов</div>
+      <div class="price-feat">Поддержка и обновления</div>
+      <div class="price-feat">Первая акция — бесплатно</div>
+    </div>
+  </div>
+  <p style="font-size:.82rem;color:var(--dim);margin-top:14px;text-align:center;">
+    Есть тарифы Старт (2 900 ₽/мес) и Про (8 900 ₽/мес) — подберём под ваш объём
+  </p>
+</section>
+
+<hr class="div">
+
+<!-- CTA -->
+<section style="padding-bottom: 0;">
+  <div class="cta-block reveal">
+    <h2>Запустим первую акцию<br>бесплатно</h2>
+    <p>Убедитесь что работает — потом решите. Настройка и запуск под ключ.</p>
+    <div class="cta-btns">
+      <a href="https://t.me/fermama_business" target="_blank" class="btn-primary">
+        Написать в Telegram →
+      </a>
+      <a href="https://vk.com/fermama_business" target="_blank" class="btn-secondary">
+        ВКонтакте
+      </a>
+    </div>
+    <p class="partner-note">По всем вопросам — ваш менеджер ответит в течение часа</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 ФерМама · fermama.vercel.app</p>
+</footer>
+
+<script>
+  // Screen switcher
+  const caps = [
+    "Экран акции с предзаказом",
+    "Каталог категорий",
+    "Список товаров",
+    "Аналитика заказов"
+  ];
+  function showScreen(i) {
+    document.querySelectorAll('.phone-frame').forEach((f,j) => f.classList.toggle('active', j===i));
+    document.querySelectorAll('.ptab').forEach((t,j) => t.classList.toggle('active', j===i));
+    document.getElementById('sc-cap').textContent = caps[i];
+  }
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
