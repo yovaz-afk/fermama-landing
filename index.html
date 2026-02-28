@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ФерМама Digital — Telegram Mini App для предзаказов в кафе, пекарне, мясном</title>
+  <title>ФерМама — Telegram Mini App для предзаказов в кафе, пекарне, мясном</title>
   <meta name="description" content="Клиенты оформляют предзаказы прямо в Telegram за 30 секунд. Mini App для кафе, пекарен и мясных магазинов. Запустим первую акцию бесплатно — убедитесь что работает." />
-  <meta property="og:title" content="Telegram Mini App для предзаказов | ФерМама Digital" />
+  <meta property="og:title" content="Telegram Mini App для предзаказов | ФерМама" />
   <meta property="og:description" content="Запустим вашу первую акцию бесплатно — убедитесь что работает, потом решите." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,7 +68,10 @@
     .nav__logo {
       font-family: 'Geologica', sans-serif; font-weight: 900; font-size: 1.12rem;
       color: var(--txt); text-decoration: none; letter-spacing: -.3px; flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
     }
+    .nav__logo img { height: 28px; width: 28px; display: block; border-radius: 50%; object-fit: cover; }
+    .nav__logo .logo-name { line-height: 1; }
     .nav__logo span { color: var(--a1); }
     .nav__links { display: flex; gap: 22px; flex: 1; }
     .nav__links a {
@@ -197,10 +200,11 @@
       flex-shrink: 0; width: 215px; border-radius: 34px;
       border: 2px solid #2a2a2a; overflow: hidden;
       box-shadow: 0 32px 80px rgba(0,0,0,.65);
-      background: #f0ede8;
+      background: #111;
     }
+    .phone-mock img { width: 100%; display: block; }
     .phone-mock--back {
-      width: 188px; filter: brightness(.6); transform: rotate(-6deg) translateY(30px);
+      width: 188px; filter: brightness(.55); transform: rotate(-6deg) translateY(30px);
       margin-bottom: 0; z-index: 0;
     }
     .phone-mock--front { transform: rotate(3deg) translateY(-14px); z-index: 1; position: relative; }
@@ -483,6 +487,7 @@
     }
     .pf-notch::after { content: ''; width: 54px; height: 5px; background: #333; border-radius: 3px; }
     .pf-screen { background: #f4f2ef; min-height: 370px; }
+    .pf img { width: 100%; display: block; }
     .phone-cap { font-size: .76rem; color: var(--dim); text-align: center; max-width: 180px; }
     @media (max-width: 640px) {
       .phones-row {
@@ -552,7 +557,14 @@
 
     .case-visual {
       background: var(--bg-card2); border: 1px solid var(--border);
-      border-radius: 18px; padding: 26px; position: relative; z-index: 1;
+      border-radius: 18px; padding: 32px 26px;
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .case-visual img {
+      width: 72%; border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(245,166,35,.13);
+      filter: brightness(.88);
     }
     .cv-head {
       display: flex; align-items: center; gap: 10px;
@@ -787,8 +799,10 @@
       display: grid; grid-template-columns: 1fr auto auto; gap: 40px; align-items: start;
     }
     @media (max-width: 640px) { .foot-inner { grid-template-columns: 1fr; gap: 24px; } }
-    .foot-logo { font-family: 'Geologica', sans-serif; font-weight: 900; font-size: 1.08rem; margin-bottom: 8px; }
-    .foot-logo span { color: var(--a1); }
+    .foot-logo { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+    .foot-logo img { height: 32px; width: 32px; display: block; border-radius: 50%; object-fit: cover; }
+    .foot-logo-txt { font-family: 'Geologica', sans-serif; font-weight: 900; font-size: 1.08rem; }
+    .foot-logo-txt span { color: var(--a1); }
     .foot-tag { font-size: .8rem; color: var(--dim); line-height: 1.55; max-width: 250px; }
     .foot-col h4 {
       font-size: .72rem; font-weight: 700; letter-spacing: 1.5px;
@@ -842,7 +856,7 @@
 <!-- ═══ NAVBAR ═══ -->
 <nav class="nav" id="navbar">
   <div class="nav__inner">
-    <a href="#" class="nav__logo">Фер<span>Мама</span></a>
+    <a href="#" class="nav__logo"><img src="img/fermama-logo.png" alt="ФерМама"><span class="logo-name">Фер<span>Мама</span></span></a>
     <div class="nav__links">
       <a href="#how">Как работает</a>
       <a href="#features">Возможности</a>
@@ -868,7 +882,7 @@
           ⚡ Telegram Mini App для food-бизнеса · Работаем по всей России
         </div>
 
-        <h1>Ваши клиенты уже в Telegram — пусть делают предзаказы там, без звонков и путаницы</h1>
+        <h1>Принимайте предзаказы в Telegram — клиент выбирает, оплачивает, вы готовите</h1>
 
         <p class="hero__sub">
           Telegram Mini App для кафе, пекарен и мясных магазинов:
@@ -895,52 +909,12 @@
       <div class="hero__phones">
         <!-- Back phone: Catalog -->
         <div class="phone-mock phone-mock--back">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="tg-bar">
-              <div class="tg-av">ФМ</div>
-              <div><div class="tg-bar-t">ФерМама</div><div class="tg-bar-s">Mini App</div></div>
-            </div>
-            <div class="tg-sec-ttl">Каталог</div>
-            <div class="tg-cats">
-              <div class="tg-cat"><em>🥩</em>Говядина</div>
-              <div class="tg-cat"><em>🐷</em>Свинина</div>
-              <div class="tg-cat"><em>🐔</em>Птица</div>
-              <div class="tg-cat"><em>🌭</em>Полуфабрикаты</div>
-            </div>
-            <div class="tg-sec-ttl">Акции</div>
-            <div class="tg-cats">
-              <div class="tg-cat" style="background:linear-gradient(135deg,#fff3e0,#ffe0b2);color:#c94040;"><em>🔥</em>Мясной день</div>
-              <div class="tg-cat"><em>⭐</em>Хиты продаж</div>
-            </div>
-          </div>
+          <img src="img/screen-catalog.jpg" alt="Каталог ФерМама Mini App">
         </div>
 
         <!-- Front phone: Promo -->
         <div class="phone-mock phone-mock--front">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="tg-bar">
-              <div class="tg-av">ФМ</div>
-              <div><div class="tg-bar-t">ФерМама</div><div class="tg-bar-s">Акции и предзаказы</div></div>
-            </div>
-            <div class="tg-promo-banner">
-              🥩
-              <div class="tg-promo-badge">−20%</div>
-            </div>
-            <div class="tg-promo-body">
-              <div class="tg-promo-name">🔥 Мясной день · 10 февраля</div>
-              <div class="tg-promo-price">Специальные цены на 1 день</div>
-            </div>
-            <div style="background:#fff;margin:0 10px;border-radius:0 0 12px 12px;padding:8px 12px 4px;">
-              <div style="font-size:.7rem;color:#111;font-weight:600;font-family:'Inter',sans-serif;">Шея свиная охл. 1 кг</div>
-              <div style="font-size:.66rem;color:#c94040;font-weight:700;font-family:'Inter',sans-serif;">712 ₽ <span style="color:#aaa;text-decoration:line-through;font-weight:400;">890 ₽</span></div>
-            </div>
-            <div class="tg-btn">🛒 Предзаказать</div>
-            <div style="background:#f0f0f0;margin:0 10px 8px;border-radius:10px;padding:9px 12px;font-size:.7rem;color:#555;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:6px;">
-              <span style="color:#2AABEE;font-size:.9rem;">✓</span> Фарш говяжий — уже в корзине
-            </div>
-          </div>
+          <img src="img/screen-promo.jpg" alt="Акции ФерМама Mini App">
         </div>
       </div>
     </div>
@@ -1105,29 +1079,7 @@
       <!-- Screen 1: Promo -->
       <div class="phone-item reveal reveal-d1">
         <div class="pf">
-          <div class="pf-notch"></div>
-          <div class="pf-screen">
-            <div class="tg-bar">
-              <div class="tg-av">ФМ</div>
-              <div><div class="tg-bar-t">ФерМама</div><div class="tg-bar-s">Акции</div></div>
-            </div>
-            <div class="tg-promo-banner" style="height:100px;">
-              🥩 <div class="tg-promo-badge">−20%</div>
-            </div>
-            <div class="tg-promo-body">
-              <div class="tg-promo-name">Мясной день · 10 февраля</div>
-              <div class="tg-promo-price">Только сегодня!</div>
-            </div>
-            <div style="background:#fff;margin:0 10px 4px;padding:8px 12px;border-radius:0 0 12px 12px;">
-              <div style="font-size:.68rem;font-weight:700;color:#111;font-family:'Inter',sans-serif;">Шея свиная 1 кг</div>
-              <div style="font-size:.63rem;color:#c94040;font-weight:700;font-family:'Inter',sans-serif;">712 ₽</div>
-            </div>
-            <div class="tg-btn">🛒 Предзаказать</div>
-            <div style="background:#fff;margin:6px 10px;padding:8px 12px;border-radius:12px;font-size:.63rem;font-family:'Inter',sans-serif;">
-              <div style="color:#555;margin-bottom:3px;">📦 Фарш говяжий 500 г</div>
-              <div style="color:#555;">🐷 Карбонад свиной 1 кг</div>
-            </div>
-          </div>
+          <img src="img/screen-promo.jpg" alt="Экран акции с предзаказом">
         </div>
         <span class="phone-cap">Экран акции с предзаказом</span>
       </div>
@@ -1135,64 +1087,15 @@
       <!-- Screen 2: Catalog -->
       <div class="phone-item reveal reveal-d2">
         <div class="pf">
-          <div class="pf-notch"></div>
-          <div class="pf-screen">
-            <div class="tg-bar">
-              <div class="tg-av">ФМ</div>
-              <div><div class="tg-bar-t">ФерМама</div><div class="tg-bar-s">Каталог</div></div>
-            </div>
-            <div style="background:#fff;margin:8px 10px;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;border:1px solid #eee;">
-              <span style="color:#aaa;font-size:.7rem;">🔍</span>
-              <span style="font-size:.7rem;color:#aaa;">Поиск товара...</span>
-            </div>
-            <div class="tg-sec-ttl">Категории</div>
-            <div class="tg-cats">
-              <div class="tg-cat"><em>🥩</em>Говядина</div>
-              <div class="tg-cat"><em>🐷</em>Свинина</div>
-              <div class="tg-cat"><em>🐔</em>Птица</div>
-              <div class="tg-cat"><em>🌭</em>Полуфабрикаты</div>
-            </div>
-            <div class="tg-sec-ttl">Хиты</div>
-            <div class="tg-cart-item" style="margin:0 10px 5px;">
-              <span class="tg-ci-em">🥩</span>
-              <div><div class="tg-ci-name">Говядина вырезка</div><div class="tg-ci-sub">1 кг · охл.</div></div>
-              <span class="tg-ci-price">1 280 ₽</span>
-            </div>
-          </div>
+          <img src="img/screen-catalog.jpg" alt="Каталог категорий">
         </div>
         <span class="phone-cap">Каталог категорий</span>
       </div>
 
-      <!-- Screen 3: Cart/Checkout -->
+      <!-- Screen 3: Products/Checkout -->
       <div class="phone-item reveal reveal-d3">
         <div class="pf">
-          <div class="pf-notch"></div>
-          <div class="pf-screen">
-            <div class="tg-bar">
-              <div class="tg-av">ФМ</div>
-              <div><div class="tg-bar-t">Корзина</div><div class="tg-bar-s">3 товара</div></div>
-            </div>
-            <div class="tg-sec-ttl">Ваш заказ</div>
-            <div class="tg-cart-item">
-              <span class="tg-ci-em">🥩</span>
-              <div><div class="tg-ci-name">Шея свиная 1 кг</div><div class="tg-ci-sub">×1</div></div>
-              <span class="tg-ci-price">712 ₽</span>
-            </div>
-            <div class="tg-cart-item">
-              <span class="tg-ci-em">🐄</span>
-              <div><div class="tg-ci-name">Фарш говяжий</div><div class="tg-ci-sub">×2</div></div>
-              <span class="tg-ci-price">960 ₽</span>
-            </div>
-            <div class="tg-cart-item">
-              <span class="tg-ci-em">🌭</span>
-              <div><div class="tg-ci-name">Купаты домашние</div><div class="tg-ci-sub">×1</div></div>
-              <span class="tg-ci-price">420 ₽</span>
-            </div>
-            <div class="tg-cart-total">
-              <span>Итого:</span><span style="color:var(--a2)">2 092 ₽</span>
-            </div>
-            <div class="tg-btn">✅ Оформить предзаказ</div>
-          </div>
+          <img src="img/screen-products.jpg" alt="Оформление предзаказа">
         </div>
         <span class="phone-cap">Оформление предзаказа</span>
       </div>
@@ -1236,33 +1139,7 @@
       </div>
 
       <div class="case-visual">
-        <div class="cv-head">
-          <div class="cv-av">ФМ</div>
-          <div><div class="cv-name">ФерМама Digital</div><div class="cv-sub">Аналитика предзаказов</div></div>
-        </div>
-        <div class="cv-msg">
-          🎉 Акция «Мясной день» завершена<br/>
-          Период: 9–10 февраля 2026<br/>
-          Статус: <strong style="color:#32b478;">Выполнено</strong>
-        </div>
-        <div class="cv-stats">
-          <div class="cv-stat">
-            <div class="cv-stat__num">53 564 ₽</div>
-            <div class="cv-stat__lbl">выручка за акцию</div>
-          </div>
-          <div class="cv-stat">
-            <div class="cv-stat__num">17</div>
-            <div class="cv-stat__lbl">предзаказов</div>
-          </div>
-          <div class="cv-stat">
-            <div class="cv-stat__num">2 дня</div>
-            <div class="cv-stat__lbl">длилась акция</div>
-          </div>
-          <div class="cv-stat">
-            <div class="cv-stat__num">0</div>
-            <div class="cv-stat__lbl">отменённых</div>
-          </div>
-        </div>
+        <img src="img/screen-analytics.jpg" alt="Аналитика предзаказов ФерМама">
       </div>
     </div>
   </div>
@@ -1377,7 +1254,7 @@
         <div class="why-chk">✓</div>
         <div>
           <div class="why-title">Работает на нашем собственном бизнесе</div>
-          <div class="why-desc">Не прототипы — продукты, которыми мы сами пользуемся каждый день. Всё обкатано на реальных данных ФерМама.</div>
+          <div class="why-desc">Мы сами пользуемся этим приложением в своих магазинах прямо сейчас — и оно реально увеличивает нашу выручку.</div>
         </div>
       </div>
       <div class="why-item reveal reveal-d2">
@@ -1595,6 +1472,19 @@
         </div>
       </div>
 
+      <div class="faq-item reveal">
+        <div class="faq-q">
+          А если Telegram перестанет работать?
+          <span class="faq-ic">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            Всё что сделано — можно перенести на отдельный сайт и получится полноценный интернет-магазин.
+            Условия переноса обсуждаем индивидуально при встрече.
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1631,14 +1521,17 @@
   <div class="wrap">
     <div class="foot-inner">
       <div>
-        <div class="foot-logo">Фер<span>Мама</span> Digital</div>
+        <div class="foot-logo">
+          <img src="img/fermama-logo.png" alt="ФерМама">
+          <span class="foot-logo-txt">Фер<span>Мама</span></span>
+        </div>
         <div class="foot-tag">FoodTech-инструменты от команды, которая сама в food-бизнесе</div>
       </div>
       <div class="foot-col">
         <h4>Контакты</h4>
-        <a href="https://t.me/FerMama" target="_blank" rel="noopener">Telegram: @FerMama</a>
-        <a href="https://vk.com/fermama" target="_blank" rel="noopener">ВКонтакте</a>
-        <a href="https://t.me/fermama_cases" target="_blank" rel="noopener">Канал с кейсами</a>
+        <a href="https://t.me/fermama_business" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:middle;margin-right:5px;opacity:.75"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.26 13.593l-2.963-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.891.966z"/></svg>Канал основателя</a>
+        <a href="https://vk.com/fermama_business" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:middle;margin-right:5px;opacity:.75"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.712-1.033-1.033-1.49-.953-1.49.162v1.55c0 .436-.143.7-1.324.7-1.938 0-4.084-1.172-5.592-3.36C5.372 11.675 4.5 9.35 4.5 8.8c0-.31.118-.596.574-.596h1.744c.427 0 .59.196.754.654.83 2.395 2.215 4.494 2.787 4.494.215 0 .313-.1.313-.645V10.29c-.066-1.16-.68-1.26-.68-1.674 0-.202.163-.406.424-.406h2.742c.36 0 .49.196.49.622v3.346c0 .36.163.49.264.49.215 0 .394-.13.787-.523 1.217-1.36 2.085-3.456 2.085-3.456.117-.25.313-.48.74-.48h1.744c.525 0 .637.27.525.637-.22.98-2.348 4.02-2.348 4.02-.185.302-.252.436 0 .77.185.25.79.77 1.193 1.237.74.848 1.308 1.56 1.46 2.048.163.49-.098.74-.588.74z"/></svg>ВКонтакте</a>
+        <a href="https://vk.com/wall-161371277_911" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:inline;vertical-align:middle;margin-right:5px;opacity:.75"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.862-.523-2.049-1.712-1.033-1.033-1.49-.953-1.49.162v1.55c0 .436-.143.7-1.324.7-1.938 0-4.084-1.172-5.592-3.36C5.372 11.675 4.5 9.35 4.5 8.8c0-.31.118-.596.574-.596h1.744c.427 0 .59.196.754.654.83 2.395 2.215 4.494 2.787 4.494.215 0 .313-.1.313-.645V10.29c-.066-1.16-.68-1.26-.68-1.674 0-.202.163-.406.424-.406h2.742c.36 0 .49.196.49.622v3.346c0 .36.163.49.264.49.215 0 .394-.13.787-.523 1.217-1.36 2.085-3.456 2.085-3.456.117-.25.313-.48.74-.48h1.744c.525 0 .637.27.525.637-.22.98-2.348 4.02-2.348 4.02-.185.302-.252.436 0 .77.185.25.79.77 1.193 1.237.74.848 1.308 1.56 1.46 2.048.163.49-.098.74-.588.74z"/></svg>Канал с кейсом</a>
       </div>
       <div class="foot-col">
         <h4>Продукты</h4>
@@ -1649,7 +1542,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span class="foot-copy">© 2026 ФерМама Digital · Работаем по всей России</span>
+      <span class="foot-copy">© 2026 ФерМама · Работаем по всей России</span>
       <span class="foot-legal">ИП Иванов И.И. · ИНН 000000000000</span>
     </div>
   </div>
