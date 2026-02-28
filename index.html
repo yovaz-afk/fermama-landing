@@ -483,7 +483,21 @@
     .pf-notch::after { content: ''; width: 54px; height: 5px; background: #333; border-radius: 3px; }
     .pf-screen { background: #f4f2ef; min-height: 370px; }
     .phone-cap { font-size: .76rem; color: var(--dim); text-align: center; max-width: 180px; }
-    @media (max-width: 640px) { .pf { width: 154px; } }
+    @media (max-width: 640px) {
+      .phones-row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 20px 20px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+      }
+      .phones-row::-webkit-scrollbar { display: none; }
+      .phone-item { flex-shrink: 0; scroll-snap-align: center; }
+      .pf { width: 200px; }
+      .pf-screen { min-height: 360px; }
+    }
 
     /* ─── CASE ─── */
     .case-box {
