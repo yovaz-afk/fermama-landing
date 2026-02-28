@@ -200,22 +200,68 @@
   .feat-item span { font-size: .92rem; line-height: 1.4; }
 
   /* ── PRICING ── */
-  .price-card {
-    background: var(--bg2); border: 1px solid var(--bdr);
-    border-radius: 22px; padding: 28px 24px; margin-top: 28px;
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px;
   }
-  .price-card.featured { border-color: var(--a1); }
-  .price-tag { font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--a1); margin-bottom: 10px; }
-  .price-name { font-family: 'Geologica', sans-serif; font-size: 1.4rem; font-weight: 900; margin-bottom: 6px; }
-  .price-val { font-family: 'Geologica', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--a1); }
-  .price-val sup { font-size: 1rem; }
-  .price-period { font-size: .82rem; color: var(--muted); margin-bottom: 4px; }
-  .price-setup { font-size: .85rem; color: var(--muted); margin-bottom: 20px; }
-  .price-setup strong { color: var(--txt); }
-  .price-divider { border: none; border-top: 1px solid var(--bdr); margin: 16px 0; }
-  .price-features { display: flex; flex-direction: column; gap: 8px; }
-  .price-feat { display: flex; align-items: center; gap: 10px; font-size: .88rem; }
-  .price-feat::before { content: '✓'; color: var(--a1); font-weight: 700; flex-shrink: 0; }
+  @media (max-width: 640px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+  .pc {
+    background: var(--bg2); border: 1px solid var(--bdr);
+    border-radius: 22px; padding: 26px 22px; position: relative; overflow: hidden;
+    transition: transform .2s, border-color .2s;
+  }
+  .pc:hover { transform: translateY(-3px); }
+  .pc--hot {
+    border-color: rgba(245,166,35,.38);
+    background: linear-gradient(160deg, rgba(245,166,35,.07), var(--bg2));
+    transform: translateY(-5px);
+  }
+  .pc--hot:hover { transform: translateY(-8px); }
+  .pc__badge {
+    position: absolute; top: 18px; right: 18px;
+    background: var(--a1); color: #0d0b0a;
+    font-size: .68rem; font-weight: 800; padding: 3px 10px; border-radius: 20px;
+  }
+  .pc__tier {
+    font-size: .72rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--dim); margin-bottom: 8px;
+  }
+  .pc--hot .pc__tier { color: var(--a1); }
+  .pc__price {
+    font-family: 'Geologica', sans-serif; font-size: 2rem;
+    font-weight: 900; line-height: 1; margin-bottom: 4px;
+  }
+  .pc--hot .pc__price {
+    background: linear-gradient(135deg, #f5a623, #e8793a);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .pc__period { font-size: .78rem; color: var(--muted); margin-bottom: 16px; }
+  .pc__setup {
+    font-size: .76rem; color: var(--dim); margin-bottom: 16px;
+    padding: 7px 10px; background: rgba(245,166,35,.05);
+    border: 1px solid var(--bdr); border-radius: 8px;
+  }
+  .pc--hot .pc__setup { background: rgba(245,166,35,.07); border-color: rgba(245,166,35,.2); }
+  .pc__features {
+    list-style: none; display: flex; flex-direction: column; gap: 8px;
+    border-top: 1px solid var(--bdr); padding-top: 18px; margin-bottom: 22px;
+  }
+  .pc__features li { display: flex; align-items: center; gap: 8px; font-size: .82rem; color: var(--muted); }
+  .pc__features li .ck { color: var(--a1); font-weight: 700; flex-shrink: 0; }
+  .pc__features li .xx { color: var(--dim); flex-shrink: 0; }
+  .pc__cta {
+    display: block; text-align: center; padding: 12px;
+    border-radius: 50px; font-weight: 700; font-size: .86rem;
+    text-decoration: none; transition: opacity .2s, transform .18s; cursor: pointer;
+  }
+  .pc--hot .pc__cta { background: linear-gradient(135deg, #f5a623, #e8793a); color: #0d0b0a; }
+  .pc:not(.pc--hot) .pc__cta { border: 1px solid var(--bdr); color: var(--txt); }
+  .pricing-trust {
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+    margin-top: 22px; font-size: .8rem; color: var(--dim);
+  }
+  .pricing-trust span::before { content: '✓ '; color: var(--a1); font-weight: 700; }
 
   /* ── CTA ── */
   .cta-block {
@@ -551,28 +597,70 @@
 <hr class="div">
 
 <!-- ЦЕНА -->
-<section>
+<section style="max-width:900px;">
   <p class="sec-label reveal">Стоимость</p>
-  <h2 class="reveal">Простые и честные<br>условия</h2>
-  <div class="price-card featured reveal">
-    <div class="price-tag">Самый популярный</div>
-    <div class="price-name">Бизнес</div>
-    <div class="price-val">4 900 ₽</div>
-    <div class="price-period">в месяц · до 500 заказов</div>
-    <div class="price-setup">+ разовая настройка <strong>20 000 ₽</strong></div>
-    <hr class="price-divider">
-    <div class="price-features">
-      <div class="price-feat">Настройка под ваш бренд (цвета, лого, ассортимент)</div>
-      <div class="price-feat">Каталог без ограничений по товарам</div>
-      <div class="price-feat">Акции и предзаказы</div>
-      <div class="price-feat">Аналитика и база клиентов</div>
-      <div class="price-feat">Поддержка и обновления</div>
-      <div class="price-feat">Первая акция — бесплатно</div>
+  <h2 class="reveal">Прозрачные тарифы — без сюрпризов</h2>
+  <p class="lead reveal">Разовая настройка + ежемесячная подписка. Первая акция — бесплатно, чтобы убедиться что работает.</p>
+  <div class="pricing-grid">
+
+    <!-- Старт -->
+    <div class="pc reveal">
+      <div class="pc__tier">Старт</div>
+      <div class="pc__price">2 900 ₽</div>
+      <div class="pc__period">в месяц · до 300 заказов</div>
+      <div class="pc__setup">+ разовая настройка <strong style="color:var(--muted);">15 000 ₽</strong></div>
+      <ul class="pc__features">
+        <li><span class="ck">✓</span> До 300 заказов/мес</li>
+        <li><span class="ck">✓</span> Каталог товаров и акции</li>
+        <li><span class="ck">✓</span> Приём предзаказов</li>
+        <li><span class="ck">✓</span> Базовая аналитика</li>
+        <li><span class="ck">✓</span> База клиентов</li>
+        <li><span class="xx">—</span> Реферальные ссылки</li>
+      </ul>
+      <a href="https://t.me/fermama_business" target="_blank" class="pc__cta">Подключить</a>
     </div>
+
+    <!-- Бизнес -->
+    <div class="pc pc--hot reveal">
+      <div class="pc__badge">Популярный</div>
+      <div class="pc__tier">Бизнес</div>
+      <div class="pc__price">4 900 ₽</div>
+      <div class="pc__period">в месяц · до 1 000 заказов</div>
+      <div class="pc__setup">+ разовая настройка <strong style="color:var(--a1);">20 000 ₽</strong></div>
+      <ul class="pc__features">
+        <li><span class="ck">✓</span> До 1 000 заказов/мес</li>
+        <li><span class="ck">✓</span> Каталог и акции</li>
+        <li><span class="ck">✓</span> Полная аналитика</li>
+        <li><span class="ck">✓</span> Реферальные ссылки</li>
+        <li><span class="ck">✓</span> База клиентов</li>
+        <li><span class="ck">✓</span> Приоритетная поддержка</li>
+      </ul>
+      <a href="https://t.me/fermama_business" target="_blank" class="pc__cta">Подключить</a>
+    </div>
+
+    <!-- Про -->
+    <div class="pc reveal">
+      <div class="pc__tier">Про</div>
+      <div class="pc__price">8 900 ₽</div>
+      <div class="pc__period">в месяц · безлимит</div>
+      <div class="pc__setup">+ разовая настройка <strong style="color:var(--muted);">25 000 ₽</strong></div>
+      <ul class="pc__features">
+        <li><span class="ck">✓</span> Безлимит заказов</li>
+        <li><span class="ck">✓</span> Полная аналитика + ИИ</li>
+        <li><span class="ck">✓</span> Акции и рефералы</li>
+        <li><span class="ck">✓</span> Интеграция 1С/МойСклад</li>
+        <li><span class="ck">✓</span> Несколько точек</li>
+        <li><span class="ck">✓</span> Персональная поддержка</li>
+      </ul>
+      <a href="https://t.me/fermama_business" target="_blank" class="pc__cta">Подключить</a>
+    </div>
+
   </div>
-  <p style="font-size:.82rem;color:var(--dim);margin-top:14px;text-align:center;">
-    Есть тарифы Старт (2 900 ₽/мес) и Про (8 900 ₽/мес) — подберём под ваш объём
-  </p>
+  <div class="pricing-trust reveal">
+    <span>Без скрытых комиссий</span>
+    <span>Первая акция бесплатно</span>
+    <span>Настроим вместе за 1 звонок</span>
+  </div>
 </section>
 
 <hr class="div">
