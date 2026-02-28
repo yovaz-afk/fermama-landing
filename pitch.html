@@ -42,7 +42,8 @@
     font-size: 1.1rem; color: var(--txt); text-decoration: none;
   }
   .nav-logo img { height: 28px; width: 28px; border-radius: 50%; object-fit: cover; }
-  .nav-logo span { color: var(--a1); }
+  .nav-logo .lname { white-space: nowrap; }
+  .nav-logo .lname span { color: var(--a1); }
   .nav-tag {
     font-size: .72rem; color: var(--muted);
     background: var(--bg3); border: 1px solid var(--bdr);
@@ -243,8 +244,7 @@
 <!-- NAV -->
 <nav class="nav">
   <a href="#" class="nav-logo">
-    <img src="img/fermama-logo.png" alt="ФерМама">
-    Фер<span>Мама</span>
+    <img src="img/fermama-logo.png" alt="ФерМама"><span class="lname">Фер<span>Мама</span></span>
   </a>
   <div class="nav-tag">Telegram Mini App</div>
 </nav>
@@ -266,6 +266,10 @@
     <button class="ptab" onclick="showScreen(1)">Каталог</button>
     <button class="ptab" onclick="showScreen(2)">Товары</button>
     <button class="ptab" onclick="showScreen(3)">Аналитика</button>
+    <button class="ptab" onclick="showScreen(4)">Рассылка</button>
+    <button class="ptab" onclick="showScreen(5)">Клиенты</button>
+    <button class="ptab" onclick="showScreen(6)">Реф. ссылки</button>
+    <button class="ptab" onclick="showScreen(7)">Заказ в TG</button>
   </div>
 
   <div class="phone-frame active" id="sc0">
@@ -279,6 +283,18 @@
   </div>
   <div class="phone-frame" id="sc3">
     <img src="img/screen-analytics.jpg" alt="Аналитика">
+  </div>
+  <div class="phone-frame" id="sc4">
+    <img src="img/screen-mailing.jpg" alt="Рассылка">
+  </div>
+  <div class="phone-frame" id="sc5">
+    <img src="img/screen-clients.jpg" alt="Клиенты">
+  </div>
+  <div class="phone-frame" id="sc6">
+    <img src="img/screen-referrals.jpg" alt="Реферальные ссылки">
+  </div>
+  <div class="phone-frame" id="sc7">
+    <img src="img/screen-order.jpg" alt="Уведомление о заказе">
   </div>
   <p class="phone-cap" id="sc-cap">Экран акции с предзаказом</p>
 </div>
@@ -298,6 +314,48 @@
     <div class="feat-item"><div class="feat-check">✓</div><span><strong>Аналитика заказов</strong> — выручка, кол-во заказов, доставка vs самовывоз</span></div>
     <div class="feat-item"><div class="feat-check">✓</div><span><strong>База клиентов</strong> — история, контакты, без сторонних CRM</span></div>
     <div class="feat-item"><div class="feat-check">✓</div><span><strong>Реферальные ссылки</strong> — считайте откуда пришёл клиент</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Рассылки в Telegram</strong> — акции и уведомления сразу всей базе</span></div>
+    <div class="feat-item"><div class="feat-check">✓</div><span><strong>Импорт каталога из Excel</strong> — весь ассортимент за одну загрузку</span></div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- РАССЫЛКИ -->
+<section>
+  <p class="sec-label reveal">Рассылки</p>
+  <h2 class="reveal">Напишите всем клиентам<br>одним сообщением</h2>
+  <p class="lead reveal">Акции, напоминания, новинки — рассылайте прямо в Telegram. Клиент получает сообщение в бот, без СМС и email-сервисов.</p>
+  <div class="feature-showcase reveal">
+    <div class="phone-frame active" style="max-width:280px;margin:28px auto 0;">
+      <img src="img/screen-mailing.jpg" alt="Рассылка клиентам">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>HTML-форматирование</strong> — жирный, курсив, ссылки, эмодзи</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Персонализация</strong> — автоподставление имени клиента</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>История рассылок</strong> — всегда видно что и когда отправляли</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Тест перед отправкой</strong> — проверьте сообщение себе прежде чем отправить всем</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ИМПОРТ ТОВАРОВ -->
+<section>
+  <p class="sec-label reveal">Управление каталогом</p>
+  <h2 class="reveal">Загрузите весь каталог<br>из Excel за минуту</h2>
+  <p class="lead reveal">Не нужно добавлять товары вручную по одному. Заполните таблицу — и весь ассортимент появится в приложении сразу.</p>
+  <div class="feature-showcase reveal">
+    <div class="phone-frame active" style="max-width:280px;margin:28px auto 0;">
+      <img src="img/screen-import.jpg" alt="Импорт товаров из Excel">
+    </div>
+    <div class="feat-list" style="margin-top:20px;">
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Загрузка .xlsx</strong> — группа, товар, единица, цена, фото</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Шаблон для скачивания</strong> — заполните и загрузите готовое</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Поиск и фильтр по категориям</strong> — быстро найти нужный товар</span></div>
+      <div class="feat-item"><div class="feat-check">✓</div><span><strong>Добавление по одному</strong> — тоже доступно прямо в интерфейсе</span></div>
+    </div>
   </div>
 </section>
 
@@ -443,8 +501,12 @@
   const caps = [
     "Экран акции с предзаказом",
     "Каталог категорий",
-    "Список товаров",
-    "Аналитика заказов"
+    "Список товаров с импортом из Excel",
+    "Аналитика заказов",
+    "Рассылка всем клиентам в Telegram",
+    "База клиентов с историей заказов",
+    "Реферальные ссылки по каналам",
+    "Уведомление о новом заказе в Telegram"
   ];
   function showScreen(i) {
     document.querySelectorAll('.phone-frame').forEach((f,j) => f.classList.toggle('active', j===i));
