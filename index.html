@@ -904,6 +904,9 @@
     @media (max-width: 500px) {
       .quiz-modal { padding: 28px 18px 24px; }
       .quiz-opts-row { grid-template-columns: repeat(2,1fr); }
+      .quiz-q { font-size: 1.32rem; }
+      .quiz-opt { padding: 16px 10px; font-size: 1rem; }
+      .quiz-opts-row .quiz-opt { padding: 16px 8px; font-size: 1rem; }
     }
 
     /* ─── UTIL ─── */
@@ -987,9 +990,7 @@
 <!-- ═══ PAIN ═══ -->
 <section class="sec" id="pain">
   <div class="wrap">
-    <p class="sec-label reveal">Узнаёте себя?</p>
     <h2 class="reveal">Знакомые проблемы?</h2>
-    <p class="sec-sub reveal">Если хотя бы одно — это про вас, значит мы можем помочь.</p>
     <div class="pain-grid">
       <div class="pain-card reveal reveal-d1">
         <span class="pain-icon">📞</span>
@@ -1068,12 +1069,87 @@
 
 <div class="divider"></div>
 
+<!-- ═══ PRICING ═══ -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <p class="sec-label reveal">Стоимость</p>
+    <h2 class="reveal">Прозрачные тарифы</h2>
+    <p class="sec-sub reveal">Разовая настройка + ежемесячная подписка. Первая акция — бесплатно, чтобы убедиться что работает.</p>
+    <div class="pricing-grid">
+
+      <!-- Старт -->
+      <div class="pc reveal reveal-d1">
+        <div class="pc__tier">Старт</div>
+        <div class="pc__price">2 900 ₽</div>
+        <div class="pc__period">в месяц · до 300 заказов</div>
+        <div style="font-size:.78rem;color:var(--dim);margin-bottom:18px;padding:8px 10px;background:rgba(245,166,35,.05);border:1px solid var(--border);border-radius:8px;">
+          + разовая настройка <strong style="color:var(--muted);">15 000 ₽</strong>
+        </div>
+        <ul class="pc__features">
+          <li><span class="ck">✓</span> До 300 заказов/мес</li>
+          <li><span class="ck">✓</span> Каталог товаров и акции</li>
+          <li><span class="ck">✓</span> Приём предзаказов</li>
+          <li><span class="ck">✓</span> Базовая аналитика</li>
+          <li><span class="ck">✓</span> База клиентов</li>
+          <li><span class="xx">—</span> Реферальные ссылки</li>
+        </ul>
+        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
+      </div>
+
+      <!-- Бизнес — Featured -->
+      <div class="pc pc--hot reveal reveal-d2">
+        <div class="pc__badge">Популярный</div>
+        <div class="pc__tier">Бизнес</div>
+        <div class="pc__price">4 900 ₽</div>
+        <div class="pc__period">в месяц · до 1 000 заказов</div>
+        <div style="font-size:.78rem;color:var(--dim);margin-bottom:18px;padding:8px 10px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-radius:8px;">
+          + разовая настройка <strong style="color:var(--a1);">20 000 ₽</strong>
+        </div>
+        <ul class="pc__features">
+          <li><span class="ck">✓</span> До 1 000 заказов/мес</li>
+          <li><span class="ck">✓</span> Каталог и акции</li>
+          <li><span class="ck">✓</span> Полная аналитика</li>
+          <li><span class="ck">✓</span> Реферальные ссылки</li>
+          <li><span class="ck">✓</span> База клиентов</li>
+          <li><span class="ck">✓</span> Приоритетная поддержка</li>
+        </ul>
+        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
+      </div>
+
+      <!-- Про -->
+      <div class="pc reveal reveal-d3">
+        <div class="pc__tier">Про</div>
+        <div class="pc__price">8 900 ₽</div>
+        <div class="pc__period">в месяц · безлимит</div>
+        <div style="font-size:.78rem;color:var(--dim);margin-bottom:18px;padding:8px 10px;background:rgba(245,166,35,.05);border:1px solid var(--border);border-radius:8px;">
+          + разовая настройка <strong style="color:var(--muted);">25 000 ₽</strong>
+        </div>
+        <ul class="pc__features">
+          <li><span class="ck">✓</span> Безлимит заказов</li>
+          <li><span class="ck">✓</span> Полная аналитика + ИИ</li>
+          <li><span class="ck">✓</span> Акции и рефералы</li>
+          <li><span class="ck">✓</span> Интеграция 1С/МойСклад</li>
+          <li><span class="ck">✓</span> Несколько точек</li>
+          <li><span class="ck">✓</span> Персональная поддержка</li>
+        </ul>
+        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
+      </div>
+
+    </div>
+    <div class="pricing-trust reveal">
+      <span>Без скрытых комиссий</span>
+      <span>Настроим вместе за 1 звонок</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ═══ FEATURES BENTO ═══ -->
 <section class="sec" id="features">
   <div class="wrap">
     <p class="sec-label reveal">Что внутри</p>
     <h2 class="reveal">Всё необходимое — уже в приложении</h2>
-    <p class="sec-sub reveal">Ничего лишнего, только то, что нужно food-бизнесу</p>
     <div class="bento">
       <!-- Large: Notifications -->
       <div class="bc bc--lg reveal reveal-d1" data-glow>
@@ -1134,7 +1210,6 @@
   <div class="wrap">
     <p class="sec-label reveal">Интерфейс</p>
     <h2 class="reveal">Чисто и понятно — клиент разберётся с первого раза</h2>
-    <p class="sec-sub reveal">Telegram Mini App выглядит нативно. Клиент видит знакомый интерфейс и доверяет ему.</p>
     <div class="phones-row">
       <!-- Screen 1: Promo -->
       <div class="phone-item reveal reveal-d1">
@@ -1211,8 +1286,7 @@
 <section class="sec" id="forwho">
   <div class="wrap">
     <p class="sec-label reveal">Для кого</p>
-    <h2 class="reveal">Подойдёт любому бизнесу с предзаказами, акциями, доставкой или самовывозом</h2>
-    <p class="sec-sub reveal">Особенно — тем, кто устал закупать «на глаз» и терять выручку в праздники</p>
+    <h2 class="reveal">Подойдёт любому food-бизнесу</h2>
     <div class="who-grid">
       <div class="who-card reveal reveal-d1">
         <div class="who-icon">🥩</div>
@@ -1303,7 +1377,6 @@
   <div class="wrap">
     <p class="sec-label reveal">Почему мы</p>
     <h2 class="reveal">Что отличает нас от обычного IT-подрядчика</h2>
-    <p class="sec-sub reveal">Мы не просто разработчики — мы сами в food-бизнесе</p>
     <div class="why-grid">
       <div class="why-item reveal reveal-d1">
         <div class="why-chk">✓</div>
@@ -1333,82 +1406,6 @@
           <div class="why-desc">Заказы, клиенты, аналитика, рефералы — внутри Telegram. Никаких платных сторонних сервисов.</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══ PRICING ═══ -->
-<section class="sec" id="pricing">
-  <div class="wrap">
-    <p class="sec-label reveal">Стоимость</p>
-    <h2 class="reveal">Прозрачные тарифы</h2>
-    <p class="sec-sub reveal">Разовая настройка + ежемесячная подписка. Первая акция — бесплатно, чтобы убедиться что работает.</p>
-    <div class="pricing-grid">
-
-      <!-- Старт -->
-      <div class="pc reveal reveal-d1">
-        <div class="pc__tier">Старт</div>
-        <div class="pc__price">2 900 ₽</div>
-        <div class="pc__period">в месяц · до 300 заказов</div>
-        <div style="font-size:.78rem;color:var(--dim);margin-bottom:18px;padding:8px 10px;background:rgba(245,166,35,.05);border:1px solid var(--border);border-radius:8px;">
-          + разовая настройка <strong style="color:var(--muted);">15 000 ₽</strong>
-        </div>
-        <ul class="pc__features">
-          <li><span class="ck">✓</span> До 300 заказов/мес</li>
-          <li><span class="ck">✓</span> Каталог товаров и акции</li>
-          <li><span class="ck">✓</span> Приём предзаказов</li>
-          <li><span class="ck">✓</span> Базовая аналитика</li>
-          <li><span class="ck">✓</span> База клиентов</li>
-          <li><span class="xx">—</span> Реферальные ссылки</li>
-        </ul>
-        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
-      </div>
-
-      <!-- Бизнес — Featured -->
-      <div class="pc pc--hot reveal reveal-d2">
-        <div class="pc__badge">Популярный</div>
-        <div class="pc__tier">Бизнес</div>
-        <div class="pc__price">4 900 ₽</div>
-        <div class="pc__period">в месяц · до 1 000 заказов</div>
-        <div style="font-size:.78rem;color:var(--dim);margin-bottom:18px;padding:8px 10px;background:rgba(245,166,35,.07);border:1px solid rgba(245,166,35,.2);border-radius:8px;">
-          + разовая настройка <strong style="color:var(--a1);">20 000 ₽</strong>
-        </div>
-        <ul class="pc__features">
-          <li><span class="ck">✓</span> До 1 000 заказов/мес</li>
-          <li><span class="ck">✓</span> Каталог и акции</li>
-          <li><span class="ck">✓</span> Полная аналитика</li>
-          <li><span class="ck">✓</span> Реферальные ссылки</li>
-          <li><span class="ck">✓</span> База клиентов</li>
-          <li><span class="ck">✓</span> Приоритетная поддержка</li>
-        </ul>
-        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
-      </div>
-
-      <!-- Про -->
-      <div class="pc reveal reveal-d3">
-        <div class="pc__tier">Про</div>
-        <div class="pc__price">8 900 ₽</div>
-        <div class="pc__period">в месяц · безлимит</div>
-        <div style="font-size:.78rem;color:var(--dim);margin-bottom:18px;padding:8px 10px;background:rgba(245,166,35,.05);border:1px solid var(--border);border-radius:8px;">
-          + разовая настройка <strong style="color:var(--muted);">25 000 ₽</strong>
-        </div>
-        <ul class="pc__features">
-          <li><span class="ck">✓</span> Безлимит заказов</li>
-          <li><span class="ck">✓</span> Полная аналитика + ИИ</li>
-          <li><span class="ck">✓</span> Акции и рефералы</li>
-          <li><span class="ck">✓</span> Интеграция 1С/МойСклад</li>
-          <li><span class="ck">✓</span> Несколько точек</li>
-          <li><span class="ck">✓</span> Персональная поддержка</li>
-        </ul>
-        <a href="#" class="pc__cta quiz-trigger">Подключить</a>
-      </div>
-
-    </div>
-    <div class="pricing-trust reveal">
-      <span>Без скрытых комиссий</span>
-      <span>Настроим вместе за 1 звонок</span>
     </div>
   </div>
 </section>
