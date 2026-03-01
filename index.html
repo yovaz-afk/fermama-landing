@@ -114,7 +114,10 @@
       transition: background .25s, border-color .25s, transform .2s;
     }
     .theme-toggle:hover { border-color: var(--a1); transform: scale(1.1); }
-    @media (max-width: 768px) { .nav__links { display: none; } }
+    @media (max-width: 768px) {
+      .nav__links { display: none; }
+      .nav__cta   { display: none; }
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -1680,7 +1683,8 @@
   (function() {
     const html = document.documentElement;
     const saved = localStorage.getItem('fm-theme');
-    if (saved === 'light') html.classList.add('light');
+    // Light is default — add class unless user explicitly chose dark
+    if (saved !== 'dark') html.classList.add('light');
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('themeToggle');
       if (!btn) return;
