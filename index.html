@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(
+    window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+    ym(107078597,'init',{webvisor:true,clickmap:true,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/107078597" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+  <!-- /Yandex.Metrika counter -->
   <title>ФерМама — Telegram Mini App для предзаказов в кафе, пекарне, мясном</title>
   <meta name="description" content="Клиенты оформляют предзаказы прямо в Telegram за 30 секунд. Mini App для кафе, пекарен и мясных магазинов. Запустим первую акцию бесплатно — убедитесь что работает." />
   <meta property="og:title" content="Telegram Mini App для предзаказов | ФерМама" />
@@ -1748,6 +1758,7 @@
     updateProgress();
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    if (typeof ym !== 'undefined') ym(107078597, 'reachGoal', 'quiz_open');
   }
 
   function closeQuiz() {
@@ -1766,6 +1777,7 @@
     currentStep = n;
     document.getElementById('qs' + currentStep).classList.add('active');
     updateProgress();
+    if (typeof ym !== 'undefined') ym(107078597, 'reachGoal', 'quiz_step_' + n);
   }
 
   // Option clicks (steps 1-3)
@@ -1813,6 +1825,7 @@
     const url = isMobile
       ? 'tg://resolve?domain=' + contact.domain + '&text=' + msg
       : 'https://t.me/' + contact.domain + '?text=' + msg;
+    if (typeof ym !== 'undefined') ym(107078597, 'reachGoal', 'quiz_submit');
     closeQuiz();
     window.open(url, '_blank');
   });
@@ -1821,10 +1834,21 @@
   document.getElementById('quizClose').addEventListener('click', closeQuiz);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeQuiz(); });
 
-  // Attach quiz to all CTA buttons
+  // Attach quiz to all CTA buttons + Metrika pricing goal
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.quiz-trigger').forEach(el => {
       el.addEventListener('click', openQuiz);
+    });
+    // pricing_click — клик «Подключить» в тарифах
+    document.querySelectorAll('.pc__cta').forEach(el => {
+      el.addEventListener('click', () => {
+        if (typeof ym !== 'undefined') ym(107078597, 'reachGoal', 'pricing_click');
+      });
+    });
+    // cta_tg_click — клик «Написать в Telegram» в футере/финальном CTA
+    const ftl = document.getElementById('footerTgLink');
+    if (ftl) ftl.addEventListener('click', () => {
+      if (typeof ym !== 'undefined') ym(107078597, 'reachGoal', 'cta_tg_click');
     });
   });
 
